@@ -49,8 +49,9 @@ void trackMode(ServoManager& sm) {
     pt.setCascade("/etc/mechanical_eyes/faces.xml");
 
     std::vector<cv::Rect> faces;
-    timespec last_face_found, current;
+    timespec last_face_found, current, start;
     bool posnull = true;
+    clock_gettime(CLOCK_REALTIME, &start);
     while(1) {
         faces.clear();
 //        std::cerr << "Searching...\n";
@@ -70,7 +71,12 @@ void trackMode(ServoManager& sm) {
             if(current.tv_sec - last_face_found.tv_sec > 30) {
                 posnull = true;
                 sm.nullPositions();
+                clock_gettime(CLOCK_REALTIME, &start);
             }
+        } else if(posnull) {
+            clock_gettime(CLOCK_REALTIME, &current);
+            float time = current.tv_sec - start.tv_sec + (current.tv_nsec - start.tv_nsec) / 1e9f;
+            lookAround(sm, time);
         }
     }
 }
