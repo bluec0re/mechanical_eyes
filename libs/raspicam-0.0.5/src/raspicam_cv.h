@@ -77,7 +77,7 @@ namespace raspicam {
          */
         virtual void retrieve ( cv::Mat& image );
 
-        virtual void read( cv::Mat& image );
+        virtual bool read( cv::Mat& image );
 
         /**Returns the specified VideoCapture property
          */

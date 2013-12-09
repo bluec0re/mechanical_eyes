@@ -1,14 +1,16 @@
 #include "persontracker.h"
 
 #ifdef RASPBERRYPI
-#include <raspicam_cv.h>
+#include <raspicam/raspicam_cv.h>
+
+using namespace raspicam;
 #endif
 
 PersonTracker::PersonTracker() : camera(NULL)
 {
 #ifdef RASPBERRYPI
     camera = new RaspiCam_Cv();
-    camera->open();
+    dynamic_cast<RaspiCam_Cv*>(camera)->open();
 #else
     camera = new cv::VideoCapture();
     camera->open(0);
