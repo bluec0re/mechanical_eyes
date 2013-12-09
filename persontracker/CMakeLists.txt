@@ -24,16 +24,16 @@ file( GLOB persontracker_SRC
 
 
 # general
-include_directories( /root/raspi_userland/interface/vcos )
-include_directories( /root/raspi_userland )
-include_directories( /root/raspi_userland/interface/vcos/pthreads )
-include_directories( /root/raspi_userland/interface/vmcs_host/linux )
-include_directories( /root/raspi_userland/interface/vmcs_host/ )
-include_directories( /root/raspi_userland/interface/vmcs_host/khronos )
-include_directories( /root/raspi_userland/interface/khronos/include )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vcos )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vcos/pthreads )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vmcs_host/linux )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vmcs_host/ )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vmcs_host/khronos )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/khronos/include )
 
 
-include_directories( /root/raspi_userland/host_applications/linux/libs/bcm_host/include )
+include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/host_applications/linux/libs/bcm_host/include )
 include_directories(${CMAKE_SOURCE_DIR}/raspicam)
 
 add_subdirectory( raspicam )
