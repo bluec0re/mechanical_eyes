@@ -82,6 +82,14 @@ namespace raspicam {
         _impl->retrieve ( image.ptr<uchar> ( 0 ));
     }
 
+    bool RaspiCam_Cv::read( cv::Mat& image ) {
+        if(grab())
+            retrieve( image );
+        else
+            image.release();
+        return !image.empty();
+    }
+
     /**Returns the specified VideoCapture property
      */
 

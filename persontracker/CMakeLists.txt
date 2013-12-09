@@ -2,8 +2,21 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( persontracker )
 
+execute_process(COMMAND grep -o BCM2708 /proc/cpuinfo
+    OUTPUT_VARIABLE SOC_NAME)
+
+if( "${SOC_NAME}" STREQUAL "" )
+    set( RASPBERRYPI false )
+else()
+    set( RASPBERRYPI true )
+endif()
+
 find_package( OpenCV REQUIRED )
+
+if( RASPBERRYPI )
 find_package( raspicam REQUIRED )
+add_definitions( -DRASPBERRYPI=1 )
+endif()
 
 set( standalone_SRC  "${persontracker_SOURCE_DIR}/standalone/main.cpp" )
 
@@ -14,40 +27,15 @@ file( GLOB persontracker_SRC
     )
 
 
-# raspicam
-#set( MMAL_LIBS 
-#     /opt/vc/lib/libmmal_core.so
-#     /opt/vc/lib/libmmal_util.so
-#     /opt/vc/lib/libmmal_vc_client.so
-#    )
-#set( VCOS_LIBS /opt/vc/lib/libvcos.so )
-#set( BCM_HOST_LIBS /opt/vc/lib/libbcm_host.so )
-
-
-# general
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vcos )
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland )
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vcos/pthreads )
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vmcs_host/linux )
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vmcs_host/ )
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/vmcs_host/khronos )
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/interface/khronos/include )
-#
-#
-#include_directories( ${CMAKE_SOURCE_DIR}/../libs/raspi_userland/host_applications/linux/libs/bcm_host/include )
-#include_directories(${CMAKE_SOURCE_DIR}/raspicam)
-#
-#add_subdirectory( raspicam )
-#
-#link_directories( ${persontracker_BINARY_DIR}/raspicam )
-#link_directories( /opt/vc/lib )
-
-# end raspicam
-
 include_directories( "${persontracker_SOURCE_DIR}/src" )
 
 add_library( persontracker SHARED ${persontracker_SRC} )
-target_link_libraries( persontracker ${OpenCV_LIBS} ${raspicam_CV_LIBS} )
+
+if( RASPBERRYPI )
+    target_link_libraries( persontracker ${OpenCV_LIBS} ${raspicam_CV_LIBS} )
+else()
+    target_link_libraries( persontracker ${OpenCV_LIBS} )
+endif()
 
 add_executable( tracker_standalone ${standalone_SRC} )
 target_link_libraries( tracker_standalone persontracker ${OpenCV_LIBS} )

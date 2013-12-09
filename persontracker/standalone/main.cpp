@@ -1,6 +1,6 @@
-#include <tracker.h>
+#include <persontracker.h>
 
 int main(int argc, char **argv) {
-    setup();
+    PersonTracker pt;
     return 0;
 }

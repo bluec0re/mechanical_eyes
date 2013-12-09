@@ -46,7 +46,7 @@ namespace raspicam {
     };
     /**Class for using Raspberry camera as in opencv
     */
-    class RaspiCam_Cv {
+    class RaspiCam_Cv : public cv::VideoCapture {
         _private::Private_Impl *_impl;
         public:
         /**Constructor
@@ -54,33 +54,35 @@ namespace raspicam {
         RaspiCam_Cv();
         /**Destructor
          */
-        ~RaspiCam_Cv();
+        virtual ~RaspiCam_Cv();
         /** Open  capturing device for video capturing
          */
-        bool open ( void );
+        virtual bool open ( void );
         /**
          * Returns true if video capturing has been initialized already.
          */
-        bool isOpened() const;
+        virtual bool isOpened() const;
         /**
         *Closes video file or capturing device.
         */
-        void release();
+        virtual void release();
 
         /**
          * Grabs the next frame from video file or capturing device.
          */
-        bool grab();
+        virtual bool grab();
 
         /**
         *Decodes and returns the grabbed video frame.
          */
-        void retrieve ( cv::Mat& image );
+        virtual void retrieve ( cv::Mat& image );
+
+        virtual void read( cv::Mat& image );
 
         /**Returns the specified VideoCapture property
          */
 
-        double get ( int propId );
+        virtual double get ( int propId );
 
         /**Sets a property in the VideoCapture. 
 	 * 
@@ -96,7 +98,7 @@ namespace raspicam {
 	 * 
          */
 
-        bool set ( int propId, double value );
+        virtual bool set ( int propId, double value );
 
         /** Returns the camera identifier. We assume the camera id is the one of the raspberry obtained using raspberry serial number obtained in /proc/cpuinfo
          */
