@@ -3,9 +3,17 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
+    std::cout << "Starting\n";
     PersonTracker pt;
+    pt.getCamera().set( CV_CAP_PROP_FRAME_WIDTH, 1280 );
+    pt.getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, 960 );
+    pt.getCamera().set( CV_CAP_PROP_BRIGHTNESS, 50 );
+    pt.getCamera().set( CV_CAP_PROP_CONTRAST, 50 );
+    pt.getCamera().set( CV_CAP_PROP_SATURATION, 50 );
+    pt.getCamera().set( CV_CAP_PROP_GAIN, 50 );
     pt.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
 
+    std::cout << "Finding persons\n";
     std::vector<cv::Rect> persons = pt.getPersons();
     cv::Mat img = pt.getLastImg();
     PersonRelativeLocator prl(img.size());
@@ -33,6 +41,7 @@ int main(int argc, char **argv) {
     }
     cv::imwrite("persons.png", img);
 
+    std::cout << "Finding faces\n";
     std::vector<cv::Rect> faces = pt.getFaces();
     img = pt.getLastImg();
     RelativeLocator rl(img.size());

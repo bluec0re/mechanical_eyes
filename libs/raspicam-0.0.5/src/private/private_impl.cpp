@@ -172,7 +172,7 @@ namespace raspicam {
                 cerr<<__FILE__<<":"<<__LINE__<<" :Private_Impl::retrieve type is not RASPICAM_FORMAT_IGNORE as it should be"<<endl;
             }
             if ( State.captureFtm==RASPICAM_FORMAT_BGR ) //need to swap channels
-                convertBGR2RGB ( data,callback_data._buffData.data,getImageTypeSize ( State.captureFtm ) );
+                convertBGR2RGB ( callback_data._buffData.data,data,getImageTypeSize ( State.captureFtm ) );
             else
                 memcpy ( data,callback_data._buffData.data,getImageTypeSize ( State.captureFtm ) );
         }
@@ -847,13 +847,12 @@ namespace raspicam {
         void Private_Impl::convertBGR2RGB ( unsigned char *  in_bgr,unsigned char *  out_rgb,int size ) {
             unsigned char *end=in_bgr+size;
             while ( in_bgr<end ) {
-                unsigned char aux=in_bgr[0];
-                in_bgr[0]=in_bgr[2];
-                in_bgr[2]=aux;
+                out_rgb[2]=in_bgr[0];
+                out_rgb[1]=in_bgr[1];
+                out_rgb[0]=in_bgr[2];
                 in_bgr+=3;
+                out_rgb+=3;
             }
-            mempcpy ( out_rgb,in_bgr,size );
-
         }
 
     };
