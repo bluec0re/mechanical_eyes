@@ -82,7 +82,10 @@ bool PersonTracker::getFaces(std::vector<cv::Rect>& faces) {
     if(!img.data)
         return false;
 
-    haarCascade.detectMultiScale(img, faces);
+    cvtColor(img, img, cv::COLOR_BGR2GRAY);
+    equalizeHist(img, img);
+// scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE
+    haarCascade.detectMultiScale(img, faces, 1.3, 4, cv::CASCADE_SCALE_IMAGE | cv::CASCADE_FIND_BIGGEST_OBJECT, cv::Size(30, 30));
 
     return true;
 }

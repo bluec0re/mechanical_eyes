@@ -5,13 +5,14 @@
 int main(int argc, char **argv) {
     std::cout << "Starting\n";
     PersonTracker pt;
-    pt.getCamera().set( CV_CAP_PROP_FRAME_WIDTH, 1280 );
-    pt.getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, 960 );
+//    pt.getCamera().set( CV_CAP_PROP_FRAME_WIDTH, 1280 );
+//    pt.getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, 960 );
     pt.getCamera().set( CV_CAP_PROP_BRIGHTNESS, 50 );
     pt.getCamera().set( CV_CAP_PROP_CONTRAST, 50 );
     pt.getCamera().set( CV_CAP_PROP_SATURATION, 50 );
     pt.getCamera().set( CV_CAP_PROP_GAIN, 50 );
     pt.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
+    pt.setCascade("faces.xml");
 
     std::cout << "Finding persons\n";
     std::vector<cv::Rect> persons = pt.getPersons();
