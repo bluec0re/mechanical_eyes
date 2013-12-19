@@ -1,10 +1,13 @@
 #include "persontracker.h"
+#include "config.h"
 
 #ifdef RASPBERRYPI
 #include <raspicam/raspicam_cv.h>
 
 using namespace raspicam;
 #endif
+
+#define PT_SECTION "persontracker"
 
 PersonTracker::PersonTracker() : camera(NULL)
 {
@@ -85,7 +88,33 @@ bool PersonTracker::getFaces(std::vector<cv::Rect>& faces) {
     cvtColor(img, img, cv::COLOR_BGR2GRAY);
     equalizeHist(img, img);
 // scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE
-    haarCascade.detectMultiScale(img, faces, 1.3, 4, cv::CASCADE_SCALE_IMAGE | cv::CASCADE_FIND_BIGGEST_OBJECT, cv::Size(30, 30));
+    haarCascade.detectMultiScale(img, faces,
+            getConfig().GetReal(PT_SECTION "-face", "scalefactor", 1.3),
+            getConfig().GetInteger(PT_SECTION "-face", "minneighbors", 4),
+            getConfig().GetInteger(PT_SECTION "-face", "flags", cv::CASCADE_SCALE_IMAGE | cv::CASCADE_FIND_BIGGEST_OBJECT),
+            cv::Size(
+                getConfig().GetInteger(PT_SECTION "-face", "minsize_x", 30),
+                getConfig().GetInteger(PT_SECTION "-face", "minsize_y", 30)
+            ),
+            cv::Size(
+                getConfig().GetInteger(PT_SECTION "-face", "maxsize_x", 0),
+                getConfig().GetInteger(PT_SECTION "-face", "maxsize_y", 0)
+            ));
 
     return true;
+}
+
+void PersonTracker::loadSettings() {
+    getCamera().set( CV_CAP_PROP_FRAME_WIDTH, getConfig().GetInteger(
+                PT_SECTION, "width", 640));
+    getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, getConfig().GetInteger(
+                PT_SECTION, "height", 480));
+    getCamera().set( CV_CAP_PROP_BRIGHTNESS, getConfig().GetInteger(
+                PT_SECTION, "brightness", 50));
+    getCamera().set( CV_CAP_PROP_CONTRAST, getConfig().GetInteger(
+                PT_SECTION, "contrast", 50));
+    getCamera().set( CV_CAP_PROP_SATURATION, getConfig().GetInteger(
+                PT_SECTION, "saturation", 50));
+    getCamera().set( CV_CAP_PROP_GAIN, getConfig().GetInteger(
+                PT_SECTION, "gain", 50));
 }

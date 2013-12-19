@@ -30,6 +30,8 @@ public:
     virtual const cv::Mat& getLastImg() const {
         return img;
     }
+
+    virtual void loadSettings();
 private:
     cv::VideoCapture* camera;
     cv::HOGDescriptor hog;
