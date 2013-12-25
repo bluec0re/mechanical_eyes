@@ -3,6 +3,7 @@
 #include <iostream>
 
 #ifdef RASPBERRYPI
+#include <unistd.h>
 #include <raspicam/raspicam_cv.h>
 
 using namespace raspicam;
@@ -14,10 +15,8 @@ PersonTracker::PersonTracker() : camera(NULL)
 {
 #ifdef RASPBERRYPI
     camera = new RaspiCam_Cv();
-    dynamic_cast<RaspiCam_Cv*>(camera)->open();
 #else
     camera = new cv::VideoCapture();
-    camera->open(0);
 #endif
 }
 
@@ -39,6 +38,16 @@ PersonTracker::~PersonTracker()
         camera->release();
         delete camera;
     }
+}
+
+bool PersonTracker::open() {
+    if(getCamera().isOpened())
+        return false;
+#ifdef RASPBERRYPI
+    return dynamic_cast<RaspiCam_Cv*>(camera)->open();
+#else
+    return camera->open(0);
+#endif
 }
 
 cv::VideoCapture& PersonTracker::getCamera() const {
@@ -99,7 +108,7 @@ bool PersonTracker::getFaces(std::vector<cv::Rect>& faces) {
     return true;
 }
 
-void PersonTracker::loadSettings() {
+bool PersonTracker::loadSettings() {
     int width = getConfig().GetInteger(PT_SECTION, "width", 640);
     int height = getConfig().GetInteger(PT_SECTION, "height", 480);
     int brightness = getConfig().GetInteger(PT_SECTION, "brightness", 50);
@@ -138,4 +147,18 @@ void PersonTracker::loadSettings() {
               << " Flags: " << face_flags << std::endl
               << " Min Size: " << face_minsize.width << "x" << face_minsize.height << std::endl
               << " Max Size: " << face_maxsize.width << "x" << face_maxsize.height << std::endl;
+/*
+    // restart camera
+    if(getCamera().isOpened()) {
+        std::cout << "Restarting camera\n";
+        getCamera().release();
+#ifdef RASPBERRYPI
+        // wait 1 sec to disable
+        sleep(2);
+        return dynamic_cast<RaspiCam_Cv&>(getCamera()).open();
+#else
+        return getCamera().open(0);
+#endif
+    }*/
+    return true;
 }

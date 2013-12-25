@@ -9,6 +9,11 @@ int main(int argc, char **argv) {
     std::cout << "Starting\n";
     PersonTracker pt;
     pt.loadSettings();
+    if(!pt.open()) {
+        std::cerr << "Error opening camera\n";
+        return -1;
+    }
+
     pt.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
     pt.setCascade("faces.xml");
 

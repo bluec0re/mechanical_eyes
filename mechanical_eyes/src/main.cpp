@@ -38,7 +38,14 @@ void demoMode(ServoManager& sm, int sleeptime) {
 void trackMode(ServoManager& sm) {
     PersonTracker pt;
     std::cout << "[*] Loading camera settings\n";
-    pt.loadSettings();
+    if(!pt.loadSettings()) {
+        std::cerr << "Error on loading settings\n";
+        return;
+    }
+    if(!pt.open()) {
+        std::cerr << "Error on open camera\n";
+        return;
+    }
     pt.setCascade("faces.xml");
 
     std::vector<cv::Rect> faces;

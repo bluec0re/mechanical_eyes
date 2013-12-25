@@ -31,7 +31,8 @@ public:
         return img;
     }
 
-    virtual void loadSettings();
+    virtual bool loadSettings();
+    virtual bool open();
 private:
     cv::VideoCapture* camera;
     cv::HOGDescriptor hog;
