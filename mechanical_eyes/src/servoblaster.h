@@ -23,6 +23,11 @@ public:
     Servo(int servo) : servo(servo),min(0),max(359) {}
     
     bool setPosition(int pos) const { 
+        pos = pos + pos % 2;
+        if(pos > max)
+            pos = max;
+        else if(pos < min)
+            pos = min;
         return setServoPosition(servo, pos) != 0;
     }
 
@@ -33,8 +38,8 @@ public:
     void setMin(int m) { min = m;}
     void setMax(int m) { max = m;}
 
-    bool setPosition(float relpos) const {
-        return setServoPosition(servo, min + (max-min)*relpos);
+    bool setRelPosition(float relpos) const {
+        return setPosition(min + (max-min)*relpos);
     }
 
     float getRelPosition() const {
@@ -48,10 +53,6 @@ private:
     int min, max;
 };
 
-std::ostream& operator<<(std::ostream& os, const Servo& s) {
-    os << "Servo " << s.servo << " [" << s.min << "," << s.max << "]" << " @ " << s.getPosition();
-    return os;
-}
 #endif
 
 #endif

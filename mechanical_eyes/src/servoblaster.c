@@ -10,6 +10,7 @@ int setServoPosition(int servo, int position) {
 
     char buffer[20];
     snprintf(buffer, 19, "%d=%d\n", servo, position);
+    fprintf(stderr, "%s", buffer);
 
     fputs(buffer, fp);
 

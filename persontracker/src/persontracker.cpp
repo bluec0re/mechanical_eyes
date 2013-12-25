@@ -1,5 +1,6 @@
 #include "persontracker.h"
 #include "config.h"
+#include <iostream>
 
 #ifdef RASPBERRYPI
 #include <raspicam/raspicam_cv.h>
@@ -89,32 +90,52 @@ bool PersonTracker::getFaces(std::vector<cv::Rect>& faces) {
     equalizeHist(img, img);
 // scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE
     haarCascade.detectMultiScale(img, faces,
-            getConfig().GetReal(PT_SECTION "-face", "scalefactor", 1.3),
-            getConfig().GetInteger(PT_SECTION "-face", "minneighbors", 4),
-            getConfig().GetInteger(PT_SECTION "-face", "flags", cv::CASCADE_SCALE_IMAGE | cv::CASCADE_FIND_BIGGEST_OBJECT),
-            cv::Size(
-                getConfig().GetInteger(PT_SECTION "-face", "minsize_x", 30),
-                getConfig().GetInteger(PT_SECTION "-face", "minsize_y", 30)
-            ),
-            cv::Size(
-                getConfig().GetInteger(PT_SECTION "-face", "maxsize_x", 0),
-                getConfig().GetInteger(PT_SECTION "-face", "maxsize_y", 0)
-            ));
+            face_scalefactor,
+            face_minneighbors,
+            face_flags,
+            face_minsize,
+            face_maxsize);
 
     return true;
 }
 
 void PersonTracker::loadSettings() {
-    getCamera().set( CV_CAP_PROP_FRAME_WIDTH, getConfig().GetInteger(
-                PT_SECTION, "width", 640));
-    getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, getConfig().GetInteger(
-                PT_SECTION, "height", 480));
-    getCamera().set( CV_CAP_PROP_BRIGHTNESS, getConfig().GetInteger(
-                PT_SECTION, "brightness", 50));
-    getCamera().set( CV_CAP_PROP_CONTRAST, getConfig().GetInteger(
-                PT_SECTION, "contrast", 50));
-    getCamera().set( CV_CAP_PROP_SATURATION, getConfig().GetInteger(
-                PT_SECTION, "saturation", 50));
-    getCamera().set( CV_CAP_PROP_GAIN, getConfig().GetInteger(
-                PT_SECTION, "gain", 50));
+    int width = getConfig().GetInteger(PT_SECTION, "width", 640);
+    int height = getConfig().GetInteger(PT_SECTION, "height", 480);
+    int brightness = getConfig().GetInteger(PT_SECTION, "brightness", 50);
+    int contrast = getConfig().GetInteger(PT_SECTION, "contrast", 50);
+    int saturation = getConfig().GetInteger(PT_SECTION, "saturation", 50);
+    int gain = getConfig().GetInteger(PT_SECTION, "gain", 50);
+
+    std::cout << "Resolution: " << width << "x" << height << std::endl
+              << "Brightness: " << brightness << std::endl
+              << "Contrast: " << contrast << std::endl
+              << "Saturation: " << saturation << std::endl
+              << "Gain: " << gain << std::endl;
+
+    getCamera().set( CV_CAP_PROP_FRAME_WIDTH, width);
+    getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, height);
+    getCamera().set( CV_CAP_PROP_BRIGHTNESS, brightness);
+    getCamera().set( CV_CAP_PROP_CONTRAST, contrast);
+    getCamera().set( CV_CAP_PROP_SATURATION, saturation);
+    getCamera().set( CV_CAP_PROP_GAIN, gain);
+
+    face_scalefactor = getConfig().GetReal(PT_SECTION "-face", "scalefactor", 1.3);
+    face_minneighbors = getConfig().GetInteger(PT_SECTION "-face", "minneighbors", 4);
+    face_flags = getConfig().GetInteger(PT_SECTION "-face", "flags", cv::CASCADE_SCALE_IMAGE | cv::CASCADE_FIND_BIGGEST_OBJECT);
+    face_minsize = cv::Size(
+                getConfig().GetInteger(PT_SECTION "-face", "minsize_x", 30),
+                getConfig().GetInteger(PT_SECTION "-face", "minsize_y", 30)
+            );
+    face_maxsize = cv::Size(
+                getConfig().GetInteger(PT_SECTION "-face", "maxsize_x", 0),
+                getConfig().GetInteger(PT_SECTION "-face", "maxsize_y", 0)
+            );
+
+    std::cout << "Face Settings:\n"
+              << " Scalefactor: " << face_scalefactor << std::endl
+              << " Min neighbors: " << face_minneighbors << std::endl
+              << " Flags: " << face_flags << std::endl
+              << " Min Size: " << face_minsize.width << "x" << face_minsize.height << std::endl
+              << " Max Size: " << face_maxsize.width << "x" << face_maxsize.height << std::endl;
 }

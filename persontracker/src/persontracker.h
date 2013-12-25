@@ -37,6 +37,12 @@ private:
     cv::HOGDescriptor hog;
     cv::CascadeClassifier haarCascade;
     cv::Mat img;
+
+    float face_scalefactor;
+    int face_minneighbors;
+    int face_flags;
+    cv::Size face_minsize;
+    cv::Size face_maxsize;
 };
 
 #endif

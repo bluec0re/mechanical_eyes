@@ -1,8 +1,11 @@
 #include <persontracker.h>
 #include <utils.h>
 #include <iostream>
+#include <time.h>
 
 int main(int argc, char **argv) {
+
+    timespec start,end;
     std::cout << "Starting\n";
     PersonTracker pt;
     pt.loadSettings();
@@ -10,7 +13,11 @@ int main(int argc, char **argv) {
     pt.setCascade("faces.xml");
 
     std::cout << "Finding persons\n";
+    clock_gettime(CLOCK_REALTIME, &start);
     std::vector<cv::Rect> persons = pt.getPersons();
+    clock_gettime(CLOCK_REALTIME, &end);
+    float time = (end.tv_sec + end.tv_nsec / 1e9) - (start.tv_sec + start.tv_nsec / 1e9);
+    std::cout << "Time: " << time << "s\n";
     cv::Mat img = pt.getLastImg();
     PersonRelativeLocator prl(img.size());
     for(size_t i = 0; i < persons.size(); i++) {
@@ -38,7 +45,11 @@ int main(int argc, char **argv) {
     cv::imwrite("persons.png", img);
 
     std::cout << "Finding faces\n";
+    clock_gettime(CLOCK_REALTIME, &start);
     std::vector<cv::Rect> faces = pt.getFaces();
+    clock_gettime(CLOCK_REALTIME, &end);
+    time = (end.tv_sec + end.tv_nsec / 1e9) - (start.tv_sec + start.tv_nsec / 1e9);
+    std::cout << "Time: " << time << "s\n";
     img = pt.getLastImg();
     RelativeLocator rl(img.size());
     for(size_t i = 0; i < faces.size(); i++) {
