@@ -13,3 +13,7 @@ endif()
 
 add_subdirectory( persontracker )
 add_subdirectory( mechanical_eyes )
+
+install( FILES "mechanical_eyes.service" DESTINATION "/usr/lib/systemd/system"  )
+install( FILES "faces_lpb.xml" DESTINATION "/etc/mechanical_eyes" RENAME "faces.xml"  )
+install( FILES "settings.ini" DESTINATION "/etc/mechanical_eyes" )

@@ -3,7 +3,7 @@
 
 #include "INIReader.h"
 
-#define SETTINGS_FILE "settings.ini"
+#define SETTINGS_FILE "/etc/mechanical_eyes/settings.ini"
 
 INIReader& getConfig();
 

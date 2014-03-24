@@ -46,12 +46,12 @@ void trackMode(ServoManager& sm) {
         std::cerr << "Error on open camera\n";
         return;
     }
-    pt.setCascade("faces.xml");
+    pt.setCascade("/etc/mechanical_eyes/faces.xml");
 
     std::vector<cv::Rect> faces;
     while(1) {
         faces.clear();
-        std::cerr << "Searching...\n";
+//        std::cerr << "Searching...\n";
         if(pt.getFaces(faces) && faces.size()) {
             PersonRelativeLocator locator(pt.getLastImg().size());
             

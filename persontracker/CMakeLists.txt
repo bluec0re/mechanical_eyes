@@ -39,3 +39,5 @@ endif()
 
 add_executable( tracker_standalone ${standalone_SRC} )
 target_link_libraries( tracker_standalone persontracker ${OpenCV_LIBS} )
+
+install( TARGETS persontracker DESTINATION "lib" )

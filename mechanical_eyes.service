@@ -1,0 +1,11 @@
+[Unit]
+Description=Mechanical Eyes Daemon
+After=servod.service
+
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/mechanical_eyes
+
+[Install]
+WantedBy=multi-user.target
