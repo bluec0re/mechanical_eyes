@@ -11,6 +11,8 @@ else()
     set( RASPBERRYPI true )
 endif()
 
+list( APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake" )
+
 add_subdirectory( persontracker )
 add_subdirectory( mechanical_eyes )
 

@@ -1,15 +1,4 @@
-#cmake_minimum_required( VERSION 2.8 )
-#
 project( persontracker )
-#
-#execute_process(COMMAND grep -o BCM2708 /proc/cpuinfo
-#    OUTPUT_VARIABLE SOC_NAME)
-#
-#if( "${SOC_NAME}" STREQUAL "" )
-#    set( RASPBERRYPI false )
-#else()
-#    set( RASPBERRYPI true )
-#endif()
 
 find_package( OpenCV REQUIRED )
 
