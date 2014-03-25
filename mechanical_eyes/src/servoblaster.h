@@ -20,7 +20,7 @@ std::ostream& operator<<(std::ostream& os, const Servo& s);
 class Servo
 {
 public:
-    Servo(int servo) : servo(servo),min(0),max(359) {}
+    Servo(int servo) : servo(servo),min(0),max(359),scale(1.0) {}
     
     bool setPosition(int pos) const { 
         pos = pos + pos % 2;
@@ -35,11 +35,22 @@ public:
         return getServoPosition(servo);
     }
 
+    float getScale() const {
+        return scale;
+    }
+
+    void setScale(float scale) {
+        this->scale = scale;
+    }
+
     void setMin(int m) { min = m;}
     void setMax(int m) { max = m;}
 
     bool setRelPosition(float relpos) const {
-        return setPosition(min + (max-min)*relpos);
+        if(scale < 0)
+            return setPosition(max + scale*(max-min)*relpos);
+        else
+            return setPosition(min + scale*(max-min)*relpos);
     }
 
     float getRelPosition() const {
@@ -51,6 +62,7 @@ public:
 private:
     int servo;
     int min, max;
+    float scale;
 };
 
 #endif

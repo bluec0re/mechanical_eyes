@@ -51,26 +51,30 @@ void ServoManager::setVertical(float pos) {
 
 void ServoManager::loadServo(Servo** servo, bool horizontal, bool left) {
     const char *sname;
-    const char *maxname, *minname;
+    const char *maxname, *minname, *scale;
     if(horizontal) {
         if(left) {
             sname = "servo_horizontal_left";
             maxname = "servo_horizontal_left_max";
             minname = "servo_horizontal_left_min";
+            scale = "servo_horizontal_left_scale";
         } else {
             sname = "servo_horizontal_right";
             maxname = "servo_horizontal_right_max";
             minname = "servo_horizontal_right_min";
+            scale = "servo_horizontal_right_scale";
         }
     } else {
         if(left) {
             sname = "servo_vertical_left";
             maxname = "servo_vertical_left_max";
             minname = "servo_vertical_left_min";
+            scale = "servo_vertical_left_scale";
         } else {
             sname = "servo_vertical_right";
             maxname = "servo_vertical_right_max";
             minname = "servo_vertical_right_min";
+            scale = "servo_vertical_right_scale";
         }
     }
 
@@ -84,6 +88,7 @@ void ServoManager::loadServo(Servo** servo, bool horizontal, bool left) {
 
     (*servo)->setMin(getConfig().GetInteger(ME_SECTION, minname, 0));
     (*servo)->setMax(getConfig().GetInteger(ME_SECTION, maxname, 359));
+    (*servo)->setScale(getConfig().GetReal(ME_SECTION, scale, 1.0));
 }
 
 std::ostream& operator<<(std::ostream& os, const ServoManager& sm) {

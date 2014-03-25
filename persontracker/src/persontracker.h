@@ -44,6 +44,8 @@ private:
     int face_flags;
     cv::Size face_minsize;
     cv::Size face_maxsize;
+    bool flip_vertical;
+    bool flip_horizontal;
 };
 
 #endif

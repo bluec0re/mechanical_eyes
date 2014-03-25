@@ -9,6 +9,8 @@
 
 #include "servomaster.h"
 
+#include "GPIOClass.h"
+
 void lookAround(ServoManager& sm, float time) {
     float cycleTime = 20.f;
     float stepTime = fmod(time, cycleTime);
@@ -48,6 +50,11 @@ void trackMode(ServoManager& sm) {
     }
     pt.setCascade("/etc/mechanical_eyes/faces.xml");
 
+    GPIOClass ledGPIO("5");
+    ledGPIO.export_gpio();
+    ledGPIO.setdir_gpio("out");
+    ledGPIO.setval_gpio("0");
+
     std::vector<cv::Rect> faces;
     timespec last_face_found, current, start;
     bool posnull = true;
@@ -56,6 +63,7 @@ void trackMode(ServoManager& sm) {
         faces.clear();
 //        std::cerr << "Searching...\n";
         if(pt.getFaces(faces) && faces.size()) {
+            ledGPIO.setval_gpio("1");
             PersonRelativeLocator locator(pt.getLastImg().size());
             
             cv::Point2f loc = locator.locate(faces.at(0));
@@ -66,6 +74,7 @@ void trackMode(ServoManager& sm) {
             clock_gettime(CLOCK_REALTIME, &last_face_found);
             posnull = false;
         } else if(!posnull) {
+            ledGPIO.setval_gpio("0");
             // drive to pos null after 30 sec without a face
             clock_gettime(CLOCK_REALTIME, &current);
             if(current.tv_sec - last_face_found.tv_sec > 30) {

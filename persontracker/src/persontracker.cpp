@@ -66,6 +66,13 @@ bool PersonTracker::getPersons(std::vector<cv::Rect>& persons) {
     if(!img.data)
         return false;
 
+    if(flip_vertical && flip_horizontal)
+        flip(img, img, -1);
+    if(flip_horizontal)
+        flip(img, img, 1);
+    else if(flip_vertical)
+        flip(img, img, 0);
+
     std::vector<cv::Rect> found;
     hog.detectMultiScale(img, found, 0, cv::Size(8, 8), cv::Size(32, 32), 1.05, 2);
 
@@ -95,6 +102,13 @@ bool PersonTracker::getFaces(std::vector<cv::Rect>& faces) {
     if(!img.data)
         return false;
 
+    if(flip_vertical && flip_horizontal)
+        flip(img, img, -1);
+    if(flip_horizontal)
+        flip(img, img, 1);
+    else if(flip_vertical)
+        flip(img, img, 0);
+
     cvtColor(img, img, cv::COLOR_BGR2GRAY);
     equalizeHist(img, img);
 // scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE
@@ -115,12 +129,16 @@ bool PersonTracker::loadSettings() {
     int contrast = getConfig().GetInteger(PT_SECTION, "contrast", 50);
     int saturation = getConfig().GetInteger(PT_SECTION, "saturation", 50);
     int gain = getConfig().GetInteger(PT_SECTION, "gain", 50);
+    flip_vertical = getConfig().GetBoolean(PT_SECTION, "flip_vertical", false);
+    flip_horizontal = getConfig().GetBoolean(PT_SECTION, "flip_horizontal", false);
 
     std::cout << "Resolution: " << width << "x" << height << std::endl
               << "Brightness: " << brightness << std::endl
               << "Contrast: " << contrast << std::endl
               << "Saturation: " << saturation << std::endl
-              << "Gain: " << gain << std::endl;
+              << "Gain: " << gain << std::endl
+              << "Flip vertical: " << flip_vertical << std::endl
+              << "Flip horizontal: " << flip_horizontal << std::endl;
 
     getCamera().set( CV_CAP_PROP_FRAME_WIDTH, width);
     getCamera().set( CV_CAP_PROP_FRAME_HEIGHT, height);
