@@ -49,6 +49,8 @@ void trackMode(ServoManager& sm) {
     pt.setCascade("/etc/mechanical_eyes/faces.xml");
 
     std::vector<cv::Rect> faces;
+    timespec last_face_found, current;
+    bool posnull = true;
     while(1) {
         faces.clear();
 //        std::cerr << "Searching...\n";
@@ -59,7 +61,16 @@ void trackMode(ServoManager& sm) {
             std::cout << "Face found at " << loc.x << "," << loc.y << std::endl;
 
             sm.setHorizontal(loc.x);
-            sm.setHorizontal(loc.y);
+            sm.setVertical(loc.y);
+            clock_gettime(CLOCK_REALTIME, &last_face_found);
+            posnull = false;
+        } else if(!posnull) {
+            // drive to pos null after 30 sec without a face
+            clock_gettime(CLOCK_REALTIME, &current);
+            if(current.tv_sec - last_face_found.tv_sec > 30) {
+                posnull = true;
+                sm.nullPositions();
+            }
         }
     }
 }
