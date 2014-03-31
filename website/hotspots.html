@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <style>
+
+        @media (min-width: 750px) {
+            .hotspots {
+                box-shadow: inset 0 0 0 20px #ece9d9;
+                bottom: 0;
+                display: block;
+                height: 100%;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                z-index: 1
+            }
+
+            .cssanimations .hotspots {
+                -webkit-animation: showBorder 0.15s 1;
+                -moz-animation: showBorder 0.15s 1;
+                -ms-animation: showBorder 0.15s 1;
+                -o-animation: showBorder 0.15s 1;
+                animation: showBorder 0.15s 1
+            }
+
+            .hotspots.active {
+                box-shadow: inset 0 0 0 20px #ece9d9
+            }
+
+            .hotspots .hotspots-list {
+                left: 50%;
+                position: absolute;
+                top: 50%;
+                z-index: 2
+            }
+        }
+
+        .hotspots-frame {
+            height: 100%;
+            position: relative;
+            width: 100%
+        }
+
+        @media (min-width: 750px) {
+            .hotspots-frame.shifted {
+                width: 65% !important
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .hotspots-frame.shifted {
+                width: 71% !important
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .hotspots-frame.shifted {
+                width: 75% !important
+            }
+        }
+
+        .lt-ie9 .hotspots-frame.shifted {
+            width: 71% !important
+        }
+
+        show-bullseyes .bullseye--1 {
+            -webkit-transition-delay: 0.1s,0.1s;
+            -moz-transition-delay: 0.1s,0.1s;
+            -o-transition-delay: 0.1s,0.1s;
+            transition-delay: 0.1s,0.1s
+        }
+
+        .show-bullseyes .bullseye--2 {
+            -webkit-transition-delay: 0.2s,0.2s;
+            -moz-transition-delay: 0.2s,0.2s;
+            -o-transition-delay: 0.2s,0.2s;
+            transition-delay: 0.2s,0.2s
+        }
+
+        .show-bullseyes .bullseye--3 {
+            -webkit-transition-delay: 0.3s,0.3s;
+            -moz-transition-delay: 0.3s,0.3s;
+            -o-transition-delay: 0.3s,0.3s;
+            transition-delay: 0.3s,0.3s
+        }
+
+        .show-bullseyes .bullseye--4 {
+            -webkit-transition-delay: 0.4s,0.4s;
+            -moz-transition-delay: 0.4s,0.4s;
+            -o-transition-delay: 0.4s,0.4s;
+            transition-delay: 0.4s,0.4s
+        }
+
+        .show-bullseyes .bullseye--5 {
+            -webkit-transition-delay: 0.5s,0.5s;
+            -moz-transition-delay: 0.5s,0.5s;
+            -o-transition-delay: 0.5s,0.5s;
+            transition-delay: 0.5s,0.5s
+        }
+
+        .show-bullseyes .bullseye--6 {
+            -webkit-transition-delay: 0.6s,0.6s;
+            -moz-transition-delay: 0.6s,0.6s;
+            -o-transition-delay: 0.6s,0.6s;
+            transition-delay: 0.6s,0.6s
+        }
+
+        .shifted .bullseye,.unshifted .bullseye {
+            -webkit-transition-duration: 0s;
+            -moz-transition-duration: 0s;
+            -o-transition-duration: 0s;
+            transition-duration: 0s;
+            -webkit-transition-delay: 0s;
+            -moz-transition-delay: 0s;
+            -o-transition-delay: 0s;
+            transition-delay: 0s
+        }
+
+        .bullseye__icon--marker-shadow {
+            bottom: 0;
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            -webkit-transition: all 0.15s;
+            -moz-transition: all 0.15s;
+            -o-transition: all 0.15s;
+            transition: all 0.15s
+        }
+
+        .bullseye__icon--marker-shadow:after {
+            font-family: "icomoon";
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            speak: none;
+            text-transform: none;
+            font-size: 0.2em;
+            line-height: 5em;
+            content: "\e60e";
+            left: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            text-align: center;
+            -webkit-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-webkit-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -moz-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-moz-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -o-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-o-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0)
+        }
+
+        .bullseye--active .bullseye__icon--marker-shadow:after,.no-instore a:focus .bullseye__icon--marker-shadow:after,.no-instore a:hover .bullseye__icon--marker-shadow:after {
+            -webkit-transform: translate(0, -15px);
+            -moz-transform: translate(0, -15px);
+            -ms-transform: translate(0, -15px);
+            -o-transform: translate(0, -15px);
+            transform: translate(0, -15px);
+            -webkit-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -moz-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -o-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145)
+        }
+
+        .android .bullseye--active .bullseye__icon--marker-shadow:after,.no-textshadow .bullseye--active .bullseye__icon--marker-shadow:after,.android .no-instore a:focus .bullseye__icon--marker-shadow:after,.no-textshadow .no-instore a:focus .bullseye__icon--marker-shadow:after,.android .no-instore a:hover .bullseye__icon--marker-shadow:after,.no-textshadow .no-instore a:hover .bullseye__icon--marker-shadow:after {
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none
+        }
+
+        .bullseye__icon--marker-shadow:after {
+            color: transparent;
+            text-shadow: 0 0px 0 rgba(187,153,17,0),0 0px 0 rgba(187,153,17,0),0 0px 0 rgba(187,153,17,0),0 0px 0 rgba(187,153,17,0),0 0px 0 rgba(187,153,17,0),0 0px 0 rgba(187,153,17,0),0 0px 0 rgba(187,153,17,0);
+            -webkit-transition-duration: 0.35s,0.35s;
+            -moz-transition-duration: 0.35s,0.35s;
+            -o-transition-duration: 0.35s,0.35s;
+            transition-duration: 0.35s,0.35s;
+            -webkit-transition-delay: 0.05s,0.05s;
+            -moz-transition-delay: 0.05s,0.05s;
+            -o-transition-delay: 0.05s,0.05s;
+            transition-delay: 0.05s,0.05s
+        }
+
+        .bullseye--active .bullseye__icon--marker-shadow:after,.no-instore a:focus .bullseye__icon--marker-shadow:after,.no-instore a:hover .bullseye__icon--marker-shadow:after {
+            text-shadow: 0 2px 0 #b91,0 4px 0 #b91,0 6px 0 #b91,0 8px 0 #b91,0 10px 0 #b91,0 12px 0 #b91,0 14px 0 #b91;
+            -webkit-transition-duration: 0.35s,0.35s;
+            -moz-transition-duration: 0.35s,0.35s;
+            -o-transition-duration: 0.35s,0.35s;
+            transition-duration: 0.35s,0.35s;
+            -webkit-transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48);
+            -moz-transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48);
+            -o-transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48);
+            transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48)
+        }
+
+        .bullseye__icon--marker-shadow--mobile-product:after {
+            text-shadow: 0 0px 0 rgba(200,60,72,0),0 0px 0 rgba(200,60,72,0),0 0px 0 rgba(200,60,72,0),0 0px 0 rgba(200,60,72,0),0 0px 0 rgba(200,60,72,0),0 0px 0 rgba(200,60,72,0),0 0px 0 rgba(200,60,72,0)
+        }
+
+        .bullseye--active .bullseye__icon--marker-shadow--mobile-product:after,.no-instore a:focus .bullseye__icon--marker-shadow--mobile-product:after,.no-instore a:hover .bullseye__icon--marker-shadow--mobile-product:after {
+            text-shadow: 0 2px 0 #c83c48,0 4px 0 #c83c48,0 6px 0 #c83c48,0 8px 0 #c83c48,0 10px 0 #c83c48,0 12px 0 #c83c48,0 14px 0 #c83c48
+        }
+
+        .bullseye__icon--marker-shadow--batter:after {
+            content: "\e610"
+        }
+
+        .bullseye__icon--marker {
+            bottom: 0;
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            -webkit-transition: all 0.15s;
+            -moz-transition: all 0.15s;
+            -o-transition: all 0.15s;
+            transition: all 0.15s
+        }
+
+        .bullseye__icon--marker:after {
+            font-family: "icomoon";
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            speak: none;
+            text-transform: none;
+            font-size: 0.2em;
+            line-height: 5em;
+            content: "\e60e";
+            left: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            text-align: center;
+            -webkit-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-webkit-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -moz-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-moz-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -o-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-o-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0)
+        }
+
+        .bullseye--active .bullseye__icon--marker:after,.no-instore a:focus .bullseye__icon--marker:after,.no-instore a:hover .bullseye__icon--marker:after {
+            -webkit-transform: translate(0, -15px);
+            -moz-transform: translate(0, -15px);
+            -ms-transform: translate(0, -15px);
+            -o-transform: translate(0, -15px);
+            transform: translate(0, -15px);
+            -webkit-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -moz-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -o-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145)
+        }
+
+        .android .bullseye--active .bullseye__icon--marker:after,.no-textshadow .bullseye--active .bullseye__icon--marker:after,.android .no-instore a:focus .bullseye__icon--marker:after,.no-textshadow .no-instore a:focus .bullseye__icon--marker:after,.android .no-instore a:hover .bullseye__icon--marker:after,.no-textshadow .no-instore a:hover .bullseye__icon--marker:after {
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none
+        }
+
+        .bullseye__icon--marker:after {
+            color: #533b3c;
+            -webkit-transition-duration: 0.35s,0.35s;
+            -moz-transition-duration: 0.35s,0.35s;
+            -o-transition-duration: 0.35s,0.35s;
+            transition-duration: 0.35s,0.35s;
+            -webkit-transition-delay: 0.05s,0.05s;
+            -moz-transition-delay: 0.05s,0.05s;
+            -o-transition-delay: 0.05s,0.05s;
+            transition-delay: 0.05s,0.05s
+        }
+
+        .bullseye--active .bullseye__icon--marker:after,.no-instore a:focus .bullseye__icon--marker:after,.no-instore a:hover .bullseye__icon--marker:after {
+            color: #f3c613;
+            -webkit-transition-duration: 0.35s,0.35s;
+            -moz-transition-duration: 0.35s,0.35s;
+            -o-transition-duration: 0.35s,0.35s;
+            transition-duration: 0.35s,0.35s;
+            -webkit-transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48);
+            -moz-transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48);
+            -o-transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48);
+            transition-timing-function: cubic-bezier(0.115, 0.705, 0.425, 1.48),cubic-bezier(0.115, 0.705, 0.425, 1.48)
+        }
+
+        .bullseye__icon--marker--mobile-product:after {
+            color: #c83c48
+        }
+
+        .bullseye--active .bullseye__icon--marker--mobile-product:after,.no-instore a:focus .bullseye__icon--marker--mobile-product:after,.no-instore a:hover .bullseye__icon--marker--mobile-product:after {
+            color: #e2424f
+        }
+
+        .bullseye__icon--marker--hotspot:after {
+            color: #fff
+        }
+
+        .bullseye__icon--marker--batter:after {
+            content: "\e610"
+        }
+
+        .bullseye__icon--ring-shadow {
+            bottom: 0;
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            -webkit-transition: all 0.15s;
+            -moz-transition: all 0.15s;
+            -o-transition: all 0.15s;
+            transition: all 0.15s
+        }
+
+        .bullseye__icon--ring-shadow:after {
+            font-family: "icomoon";
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            speak: none;
+            text-transform: none;
+            font-size: 1em;
+            line-height: 1em;
+            content: "\e60e";
+            left: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            text-align: center;
+            -webkit-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-webkit-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -moz-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-moz-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -o-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-o-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0)
+        }
+
+        .bullseye--active .bullseye__icon--ring-shadow:after,.no-instore a:focus .bullseye__icon--ring-shadow:after,.no-instore a:hover .bullseye__icon--ring-shadow:after {
+            -webkit-transform: translate(0, -15px);
+            -moz-transform: translate(0, -15px);
+            -ms-transform: translate(0, -15px);
+            -o-transform: translate(0, -15px);
+            transform: translate(0, -15px);
+            -webkit-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -moz-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -o-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145)
+        }
+
+        .android .bullseye--active .bullseye__icon--ring-shadow:after,.no-textshadow .bullseye--active .bullseye__icon--ring-shadow:after,.android .no-instore a:focus .bullseye__icon--ring-shadow:after,.no-textshadow .no-instore a:focus .bullseye__icon--ring-shadow:after,.android .no-instore a:hover .bullseye__icon--ring-shadow:after,.no-textshadow .no-instore a:hover .bullseye__icon--ring-shadow:after {
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none
+        }
+
+        .bullseye__icon--ring-shadow:after {
+            color: transparent;
+            text-shadow: 0 0 0 rgba(55,14,14,0)
+        }
+
+        .bullseye--active .bullseye__icon--ring-shadow:after,.no-instore a:focus .bullseye__icon--ring-shadow:after,.no-instore a:hover .bullseye__icon--ring-shadow:after {
+            text-shadow: 10px -10px 0 rgba(55,14,14,0.4);
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none
+        }
+
+        .bullseye__icon--ring-shadow.bullseye__icon--ring-shadow--hotspot:after {
+            text-shadow: 5px -5px 0 rgba(55,14,14,0.4)
+        }
+
+        .no-rgba .bullseye__icon--ring-shadow {
+            display: none
+        }
+
+        .bullseye__icon--ring {
+            bottom: 0;
+            display: block;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            width: 100%;
+            -webkit-transition: all 0.15s;
+            -moz-transition: all 0.15s;
+            -o-transition: all 0.15s;
+            transition: all 0.15s
+        }
+
+        .bullseye__icon--ring:after {
+            font-family: "icomoon";
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            speak: none;
+            text-transform: none;
+            font-size: 1em;
+            line-height: 1em;
+            content: "\e604";
+            left: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            text-align: center;
+            -webkit-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-webkit-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -moz-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-moz-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -o-transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),-o-transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            transition: text-shadow 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),transform 0.15s cubic-bezier(0.355, -0.445, 0.755, 0.32),color 0.15s ease-in-out;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0)
+        }
+
+        .bullseye--active .bullseye__icon--ring:after,.no-instore a:focus .bullseye__icon--ring:after,.no-instore a:hover .bullseye__icon--ring:after {
+            -webkit-transform: translate(0, -15px);
+            -moz-transform: translate(0, -15px);
+            -ms-transform: translate(0, -15px);
+            -o-transform: translate(0, -15px);
+            transform: translate(0, -15px);
+            -webkit-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -moz-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            -o-transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145);
+            transition-timing-function: cubic-bezier(0.05, 1.005, 0.765, 1.145),cubic-bezier(0.05, 1.005, 0.765, 1.145)
+        }
+
+        .android .bullseye--active .bullseye__icon--ring:after,.no-textshadow .bullseye--active .bullseye__icon--ring:after,.android .no-instore a:focus .bullseye__icon--ring:after,.no-textshadow .no-instore a:focus .bullseye__icon--ring:after,.android .no-instore a:hover .bullseye__icon--ring:after,.no-textshadow .no-instore a:hover .bullseye__icon--ring:after {
+            -webkit-transform: none;
+            -moz-transform: none;
+            -ms-transform: none;
+            -o-transform: none;
+            transform: none
+        }
+
+        .bullseye__icon--ring:after {
+            color: #e4414f;
+            text-shadow: 0 0px 0 rgba(163,50,60,0),0 0px 0 rgba(163,50,60,0),0 0px 0 rgba(163,50,60,0),0 0px 0 rgba(163,50,60,0),0 0px 0 rgba(163,50,60,0),0 0px 0 rgba(163,50,60,0),0 0px 0 rgba(163,50,60,0)
+        }
+
+        .bullseye--active .bullseye__icon--ring:after,.no-instore a:focus .bullseye__icon--ring:after,.no-instore a:hover .bullseye__icon--ring:after {
+            text-shadow: 0 2px 0 #a3323c,0 4px 0 #a3323c,0 6px 0 #a3323c,0 8px 0 #a3323c,0 10px 0 #a3323c,0 12px 0 #a3323c,0 14px 0 #a3323c
+        }
+
+        .bullseye__icon--ring--mobile-product:after {
+            color: #ece9d9;
+            text-shadow: 0 0px 0 rgba(216,213,197,0),0 0px 0 rgba(216,213,197,0),0 0px 0 rgba(216,213,197,0),0 0px 0 rgba(216,213,197,0),0 0px 0 rgba(216,213,197,0),0 0px 0 rgba(216,213,197,0),0 0px 0 rgba(216,213,197,0)
+        }
+
+        .bullseye--active .bullseye__icon--ring--mobile-product:after,.no-instore a:focus .bullseye__icon--ring--mobile-product:after,.no-instore a:hover .bullseye__icon--ring--mobile-product:after {
+            text-shadow: 0 2px 0 #d8d5c5,0 4px 0 #d8d5c5,0 6px 0 #d8d5c5,0 8px 0 #d8d5c5,0 10px 0 #d8d5c5,0 12px 0 #d8d5c5,0 14px 0 #d8d5c5
+        }
+    </style>
+</head>
+<body>
+
+<div class="hotspots">
+    <div class="hotspots-frame">
+        <div id="hotspots-list">
+            <ul class="hotspots-list show-bullseyes"
+                style="-webkit-transform: translate(-258px, 0px) scale(2.2133875739644973); -webkit-transform-origin: 34% 50%; height: 338px; width: 600.8888888888888px; margin-left: -300.4444444444444px; margin-top: -169px;">
+                <li><a href="/mizuno-9spike-advanced-classic-7-cleat" class="bullseye hotspot bullseye--1"
+                       style="left: 22.5%; top: 86%; -webkit-transform: scale(0.4517961570593149);"
+                       data-track-gtm="Product Bullseye,Mizuno 9-Spike Advanced Classic 7 Cleat"><span
+                        class="visually-hidden">Mizuno 9-Spike Advanced Classic 7 Cleat</span><span
+                        class="bullseye__icon--ring-shadow bullseye__icon--ring-shadow--hotspot"></span><span
+                        class="bullseye__icon--marker-shadow bullseye__icon--marker-shadow--hotspot"></span><span
+                        class="bullseye__icon--ring bullseye__icon--ring--hotspot"></span><span
+                        class="bullseye__icon--marker bullseye__icon--marker--hotspot"></span></a></li>
+                <li><a href="/rawlings-1275-gold-glove-elite-series-glove-2014" class="bullseye hotspot bullseye--2"
+                       style="left: 48%; top: 54%; -webkit-transform: scale(0.4517961570593149);"
+                       data-track-gtm="Product Bullseye,Rawlings 12.75" gold="" glove="" elite="" series=""
+                    2014"=""><span
+                            class="visually-hidden">Rawlings 12.75" Gold Glove Elite Series Glove 2014</span><span
+                            class="bullseye__icon--ring-shadow bullseye__icon--ring-shadow--hotspot"></span><span
+                            class="bullseye__icon--marker-shadow bullseye__icon--marker-shadow--hotspot"></span><span
+                            class="bullseye__icon--ring bullseye__icon--ring--hotspot"></span><span
+                            class="bullseye__icon--marker bullseye__icon--marker--hotspot"></span></a></li>
+                <li><a href="/nike-swingman-drifit-piped-pants" class="bullseye hotspot bullseye--3"
+                       style="left: 28%; top: 65%; -webkit-transform: scale(0.4517961570593149);"
+                       data-track-gtm="Product Bullseye,Nike Swingman Dri-FIT Piped Pants"><span
+                        class="visually-hidden">Nike Swingman Dri-FIT Piped Pants</span><span
+                        class="bullseye__icon--ring-shadow bullseye__icon--ring-shadow--hotspot"></span><span
+                        class="bullseye__icon--marker-shadow bullseye__icon--marker-shadow--hotspot"></span><span
+                        class="bullseye__icon--ring bullseye__icon--ring--hotspot"></span><span
+                        class="bullseye__icon--marker bullseye__icon--marker--hotspot"></span></a></li>
+            </ul>
+        </div>
+        <div id="video-countdown"><p class="hotspots-countdown hotspots-countdown--show hotspots-countdown--changed">
+            <span class="hotspots-countdown__top hotspots-countdown__top--small hotspots-countdown__top--current">10</span><span
+                class="hotspots-countdown__bottom hotspots-countdown__bottom--small hotspots-countdown__bottom--current">10</span><span
+                class="hotspots-countdown__top hotspots-countdown__top--large hotspots-countdown__top--next">9</span><span
+                class="hotspots-countdown__bottom hotspots-countdown__bottom--large hotspots-countdown__bottom--next">9</span>
+        </p></div>
+    </div>
+</div>
+</body>
+</html>

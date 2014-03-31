@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Robotik - Mechanical Eyes</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <main>
+            <section id="landingpage">
+                <img src="img/start.jpg" id="start">
+                <img src="img/bullseye.svg" class="bullseye" id="bullseye_software">
+                <img src="img/bullseye.svg" class="bullseye" id="bullseye_hardware">
+                <img src="img/bullseye.svg" class="bullseye" id="bullseye_video">
+            </section>
+
+            <section id="software" class="tmp_hidden subpage">
+                <button class="back btn" id="back_software">&lt; back</button>
+                <h2>Used software</h2>
+                <ul class="software_list">
+                    <li>OpenCV 2.4 <a href="http://opencv.org/">http://opencv.org/</a></li>
+                    <li>ServoBlaster <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">https://github.com/richardghirst/PiBits/tree/master/ServoBlaster</a></li>
+                    <li>raspicam 0.0.5 <a href="http://sourceforge.net/projects/raspicam/">http://sourceforge.net/projects/raspicam/</a></li>
+                </ul>
+                <h2>Install steps</h2>
+                <ol>
+                    <li>install cmake</li>
+                    <li>install opencv</li>
+                    <li>install mmal (most of the time already included on raspi [raspberrypi-firmware-tools])</li>
+                    <li>build servoblaster
+                        <ol>
+                            <li>git clone https://github.com/richardghirst/PiBits</li>
+                            <li>cd PiBits/ServoBlaster/user</li>
+                            <li>make</li>
+                            <li>optional on raspbian (autostart): make install</li>
+                        </ol>
+                    </li>
+                    <li>build raspicam
+                        <ol>
+                            <li>cd &lt;mechanical_eyes dir&gt;/libs/raspicam-0.0.5/</li>
+                            <li>mkdir build && cd build</li>
+                            <li>cmake ..</li>
+                            <li>make && make install</li>
+                        </ol>
+                    </li>
+                    <li>build mechanical_eyes
+                        <ol>
+                            <li>cd &lt;mechanical_eyes dir&gt;</li>
+                            <li>mkdir build && cd build</li>
+                            <li>cmake ..</li>
+                            <li>make && make install</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="video" class="tmp_hidden subpage">
+                <button class="back btn" id="back_video">&lt; back</button>
+                <img src="img/faces.png">
+            </section>
+
+            <section id="hardware" class="tmp_hidden subpage">
+                <button class="back btn" id="back_hardware">&lt; back</button>
+
+            </section>
+        </main>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

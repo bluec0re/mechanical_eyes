@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15" cy="15" r="10" fill="none" stroke="rgb(128, 0, 0)" stroke-width="3px"/>
+    <circle cx="15" cy="15" r="4" fill="rgb(128, 0, 0)"/>
+</svg>

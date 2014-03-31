@@ -1,0 +1,63 @@
+.tmp_hidden {
+    display: none;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+section#landingpage {
+    position: relative;
+}
+
+section#landingpage img#start {
+    width: 100%;
+    height: 100%;
+}
+
+section#landingpage .bullseye {
+    position: absolute;
+    width: 5em;
+    height: 5em;
+    z-index: 5;
+    cursor: pointer;
+}
+
+section#landingpage .bullseye:hover {
+    opacity: 0.75;
+}
+
+section#landingpage #bullseye_software {
+    top: 60%;
+    left: 50%;
+}
+
+section#landingpage #bullseye_hardware {
+    top: 20%;
+    left: 50%;
+}
+
+section#landingpage #bullseye_video {
+    top: 20%;
+    left: 20%;
+}
+
+section.subpage {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+
+ul.software_list li a {
+    color: darkgray;
+}
+
+ul.software_list li a:visited {
+    color: lightgray;
+}
+
+ul.software_list li a:hover {
+    color: #b3d4fc;
+}
