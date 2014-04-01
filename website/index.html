@@ -30,30 +30,34 @@
                 <img src="img/bullseye.svg" class="bullseye" id="bullseye_software">
                 <img src="img/bullseye.svg" class="bullseye" id="bullseye_hardware">
                 <img src="img/bullseye.svg" class="bullseye" id="bullseye_video">
+				<img src="img/bullseye.svg" class="bullseye" id="bullseye_probleme">
+				<img src="img/bullseye.svg" class="bullseye" id="bullseye_planung">
+				<img src="img/bullseye.svg" class="bullseye" id="bullseye_team">
+				<img src="img/bullseye.svg" class="bullseye" id="bullseye_downloads">
             </section>
 
             <section id="software" class="tmp_hidden subpage">
                 <button class="back btn" id="back_software">&lt; back</button>
-                <h2>Used software</h2>
+                <h2>Software</h2>
                 <ul class="software_list">
                     <li>OpenCV 2.4 <a href="http://opencv.org/">http://opencv.org/</a></li>
                     <li>ServoBlaster <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">https://github.com/richardghirst/PiBits/tree/master/ServoBlaster</a></li>
                     <li>raspicam 0.0.5 <a href="http://sourceforge.net/projects/raspicam/">http://sourceforge.net/projects/raspicam/</a></li>
                 </ul>
-                <h2>Install steps</h2>
+                <h2>Installationsanleitung</h2>
                 <ol>
-                    <li>install cmake</li>
-                    <li>install opencv</li>
-                    <li>install mmal (most of the time already included on raspi [raspberrypi-firmware-tools])</li>
-                    <li>build servoblaster
+                    <li>Installiere cmake</li>
+                    <li>Installiere opencv</li>
+                    <li>Installiere mmal (meistens bereits in der Raspi Firmware enthalten [raspberrypi-firmware-tools])</li>
+                    <li>Buildprozess servoblaster
                         <ol>
                             <li>git clone https://github.com/richardghirst/PiBits</li>
                             <li>cd PiBits/ServoBlaster/user</li>
                             <li>make</li>
-                            <li>optional on raspbian (autostart): make install</li>
+                            <li>Optional auf dem raspbian OS (triggert Autostart): make install</li>
                         </ol>
                     </li>
-                    <li>build raspicam
+                    <li>Buildprozess raspicam
                         <ol>
                             <li>cd &lt;mechanical_eyes dir&gt;/libs/raspicam-0.0.5/</li>
                             <li>mkdir build && cd build</li>
@@ -61,7 +65,7 @@
                             <li>make && make install</li>
                         </ol>
                     </li>
-                    <li>build mechanical_eyes
+                    <li>Buildprozess mechanical_eyes
                         <ol>
                             <li>cd &lt;mechanical_eyes dir&gt;</li>
                             <li>mkdir build && cd build</li>
@@ -71,15 +75,51 @@
                     </li>
                 </ol>
             </section>
-
+			
             <section id="video" class="tmp_hidden subpage">
                 <button class="back btn" id="back_video">&lt; back</button>
-                <img src="img/faces.png">
+                <h2>Video</h2>
+				<img src="img/faces.png" alt="no-pic" />
             </section>
-
+			
             <section id="hardware" class="tmp_hidden subpage">
                 <button class="back btn" id="back_hardware">&lt; back</button>
-
+				<h2>Verwendete Materialien</h2>
+				<ul>
+					<li>Aluminium Profil 2,5cm x 1,5cm</li>
+					<li>Sperrholzplatten</li>
+					<li>Tischtennisbälle</li>
+					<li>Schrauben</li>
+					<li>Büroklammern (Federstahl)</li>
+					<li>Raspberry Pi</li>
+					<li>Breakout Board</li>
+					<li>Modellbau Steckverbindungen</li>
+					<li>Batteriepack (inkl. 4 AA Batterien)</li>
+				</ul>
+				<h2>Aufbau</h2>
+				<ol>
+					<li>...</li>
+				</ol>
+            </section>
+			
+			<section id="team" class="tmp_hidden subpage">
+                <button class="back btn" id="back_team">&lt; back</button>
+				<h2>Team</h2>
+            </section>
+			
+			<section id="probleme" class="tmp_hidden subpage">
+                <button class="back btn" id="back_probleme">&lt; back</button>
+				<h2>Probleme</h2>
+            </section>
+			
+			<section id="downloads" class="tmp_hidden subpage">
+                <button class="back btn" id="back_downloads">&lt; back</button>
+				<h2>Downloads</h2>
+            </section>
+			
+			<section id="planung" class="tmp_hidden subpage">
+                <button class="back btn" id="back_planung">&lt; back</button>
+				<h2>Aufgabenstellung und Planung</h2>
             </section>
         </main>
 

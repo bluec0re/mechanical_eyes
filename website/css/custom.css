@@ -24,30 +24,54 @@ section#landingpage .bullseye {
     cursor: pointer;
 }
 
-section#landingpage .bullseye:hover {
+section#landingpage .bullseye:hover, section#landingpage .bullseye:focus {
     opacity: 0.75;
 }
 
 section#landingpage #bullseye_software {
-    top: 60%;
-    left: 50%;
+    top: 20%;
+    left: 10%;
 }
 
 section#landingpage #bullseye_hardware {
     top: 20%;
-    left: 50%;
+    left: 20%;
 }
 
 section#landingpage #bullseye_video {
     top: 20%;
-    left: 20%;
+    left: 30%;
+}
+
+section#landingpage #bullseye_probleme {
+    top: 20%;
+    left: 40%;
+}
+
+section#landingpage #bullseye_planung {
+    top: 20%;
+    left: 50%;
+}
+
+section#landingpage #bullseye_team {
+    top: 20%;
+    left: 60%;
+}
+
+section#landingpage #bullseye_downloads {
+    top: 20%;
+    left: 70%;
 }
 
 section.subpage {
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 800px;
+    position: absolute;
+	width: 60%;
+	margin-left: 20%;
+	top: 50px;
+	padding: 30px;
+	background-color: #fff;
+	border-radius: 10px;
+	z-index: 10;
 }
 
 ul.software_list li a {
