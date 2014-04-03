@@ -22,6 +22,11 @@ section#landingpage .bullseye {
     height: 5em;
     z-index: 5;
     cursor: pointer;
+    background-image: url(../img/bullseye.svg);
+}
+
+section#landingpage .bullseye:hover {
+    background-image: url(../img/bullseye_hover.svg);
 }
 
 section#landingpage .bullseye:hover, section#landingpage .bullseye:focus {
@@ -64,12 +69,15 @@ section#landingpage #bullseye_downloads {
 }
 
 section.subpage {
+    padding: 30px;
+    background-color: #fff;
+    margin-left: 20%;
+    width: 60%;
+}
+
+section.subpage_js {
     position: absolute;
-	width: 60%;
-	margin-left: 20%;
 	top: 50px;
-	padding: 30px;
-	background-color: #fff;
 	border-radius: 10px;
 	z-index: 10;
 }

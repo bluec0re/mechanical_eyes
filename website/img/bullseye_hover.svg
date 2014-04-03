@@ -4,9 +4,9 @@
 <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <style type="text/css">
-           svg #extrude { display: none }
+           svg #extrude { display: inherit }
            svg:hover #extrude, svg #extrude:target {
-                display: inherit;
+                display: none;
            }
         </style>
     </defs>
