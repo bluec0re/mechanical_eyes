@@ -38,12 +38,13 @@
 
             <section id="software" class="subpage markdown-format">
                 <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_software">&lt; back</a>
-                <h2>Software</h2>
+                <h2>Eingesetzte Software</h2>
                 <ul class="software_list">
+                    <li>Arch Linux ARM f&uuml;r Raspberry Pi (ARMv6) <a href="http://archlinuxarm.org/platforms/armv6/raspberry-pi">http://archlinuxarm.org/platforms/armv6/raspberry-pi</a></li>
                     <li>OpenCV 2.4 <a href="http://opencv.org/">http://opencv.org/</a></li>
                     <li>ServoBlaster <a href="https://github.com/richardghirst/PiBits/tree/master/ServoBlaster">https://github.com/richardghirst/PiBits/tree/master/ServoBlaster</a></li>
                     <li>raspicam 0.0.5 <a href="http://sourceforge.net/projects/raspicam/">http://sourceforge.net/projects/raspicam/</a></li>
-                    <li>mechanical eyes (entstanden im Verlauf dieses Projekts) <a href="https://github.com/bluec0re/mechanical_eyes">https://github.com/bluec0re/mechanical_eyes</a></li>
+                    <li>mechanical eyes (entwickelt im Verlauf dieses Projekts) <a href="https://github.com/bluec0re/mechanical_eyes">https://github.com/bluec0re/mechanical_eyes</a></li>
                 </ul>
                 <h2>Installationsanleitung</h2>
                 <ol>
@@ -82,7 +83,19 @@
 
             <section id="video" class="subpage">
                 <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_video">&lt; back</a>
-                <h2>Video</h2>
+                <h2>Video Processing</h2>
+                Zur Erkennung von Personen im aufgezeichneten Bild wird die Grafikbibliothek OpenCV verwendet.
+                Dazu wird das Bild zun&auml;chst vorverarbeitet um Fehlerquellen wie Lichtverh&auml;ltnisse m&ouml;glichst
+                klein zu halten. Die Vorverarbeitung beinhaltet neben der Umwandlung in ein Schwarz-Wei&szlig;-Bild die
+                anschlie&szlig;ende normalisierung der Farbwerte. Dabei wird das Helligkeitsspektrum auf Werte zwischen
+                0 und 255 gestreckt. Das resultierende Bild erm&ouml;glicht es leichter Helligkeitsabstufungen zu erkennen.
+                Auf ein smoothing zur Rauschunterdr&uuml;ckung wurde explizit verzichtet um die Rechenlast f&uuml;r den
+                Raspberry Pi m&ouml;glichst klein zu halten.
+                <br/>
+                Die eigentliche Erkennung erfolgt mit dem HaarCascade Algorithmus. Dazu werden Helligkeitsdifferenzen
+                anhand von zuvor trainierten Modellen im Bild gesucht.
+                <br/>
+                Das Resultat bei einem erfolgreich gefundenen Gesicht ist im folgenden Bild zu erkennen:
 				<img src="img/faces.png" alt="no-pic" />
             </section>
 
@@ -126,13 +139,15 @@
 				<ul>
 					<li><a href="downloads/projektplan_mechanische_augen.pdf">Projektplan</a></li>
 					<li><a href="downloads/poster_mechanische_augen.pdf">Poster</a></li>
-                    <li><a href="https://github.com/bluec0re/mechanical_eyes.git">Source code (auf github)</a></li>
+                    <li><a href="https://github.com/bluec0re/mechanical_eyes">Source code (auf github)</a></li>
 				</ul>
             </section>
 
 			<section id="planung" class="subpage">
                 <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_planung">&lt; back</a>
 				<h2>Aufgabenstellung und Planung</h2>
+                Aufgabe war die Planung und Umsetzung eines Roboters, welcher mithilfe eines Raspberry Pis und Kamera
+                Personen mit seinen Augen verfolgen kann.
             </section>
 
             <!-- github ribbon -->
