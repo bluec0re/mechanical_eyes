@@ -24,6 +24,7 @@ var makelinks = function(from, to) {
 makelinks("landingpage", "software");
 makelinks("landingpage", "hardware");
 makelinks("landingpage", "video");
+makelinks("landingpage", "servo");
 makelinks("landingpage", "probleme");
 makelinks("landingpage", "planung");
 makelinks("landingpage", "team");
