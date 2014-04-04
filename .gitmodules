@@ -1,3 +1,6 @@
 [submodule "libs/raspi_userland"]
 	path = libs/raspi_userland
 	url = https://github.com/raspberrypi/userland.git
+[submodule "libs/PiBits"]
+	path = libs/PiBits
+	url = https://github.com/richardghirst/PiBits.git

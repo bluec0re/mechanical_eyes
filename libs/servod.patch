@@ -1,0 +1,15 @@
+diff --git a/ServoBlaster/user/servod.c b/ServoBlaster/user/servod.c
+index 088bf69..34de482 100644
+--- a/ServoBlaster/user/servod.c
++++ b/ServoBlaster/user/servod.c
+@@ -1333,6 +1333,10 @@ main(int argc, char **argv)
+ 	if (daemonize && daemon(0,1) < 0)
+ 		fatal("servod: Failed to daemonize process: %m\n");
+ 
++        FILE* fp = fopen("/run/servod.pid", "w");
++        fprintf(fp, "%ld\n", (long)getpid());
++        fclose(fp);
++
+ 	go_go_go();
+ 
+ 	return 0;
