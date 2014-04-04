@@ -36,7 +36,7 @@
                 <a href="#downloads" class="bullseye" id="bullseye_downloads" title="Downloads"></a>
             </section>
 
-            <section id="software" class="subpage">
+            <section id="software" class="subpage markdown-format">
                 <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_software">&lt; back</a>
                 <h2>Software</h2>
                 <ul class="software_list">
@@ -50,28 +50,31 @@
                     <li>Installiere opencv</li>
                     <li>Installiere mmal (meistens bereits in der Raspi Firmware enthalten [raspberrypi-firmware-tools])</li>
                     <li>Buildprozess servoblaster
-                        <ol>
-                            <li>git clone https://github.com/richardghirst/PiBits</li>
-                            <li>cd PiBits/ServoBlaster/user</li>
-                            <li>make</li>
-                            <li>Optional auf dem raspbian OS (triggert Autostart): make install</li>
-                        </ol>
+                        <code class="command-line">
+                            <span class="command">git clone https://github.com/richardghirst/PiBits</span>
+                            <span class="command">cd PiBits/ServoBlaster/user</span>
+                            <span class="command">make</span>
+                        </code>
+                        Optional auf dem raspbian OS (triggert Autostart):
+                        <code class="command-line">
+                            <span class="command">make install</span>
+                        </code>
                     </li>
                     <li>Buildprozess raspicam
-                        <ol>
-                            <li>cd &lt;mechanical_eyes dir&gt;/libs/raspicam-0.0.5/</li>
-                            <li>mkdir build && cd build</li>
-                            <li>cmake ..</li>
-                            <li>make && make install</li>
-                        </ol>
+                        <code class="command-line">
+                            <span class="command">cd &lt;mechanical_eyes dir&gt;/libs/raspicam-0.0.5/</span>
+                            <span class="command">mkdir build && cd build</span>
+                            <span class="command">cmake ..</span>
+                            <span class="command">make && make install</span>
+                        </code>
                     </li>
                     <li>Buildprozess mechanical_eyes
-                        <ol>
-                            <li>cd &lt;mechanical_eyes dir&gt;</li>
-                            <li>mkdir build && cd build</li>
-                            <li>cmake ..</li>
-                            <li>make && make install</li>
-                        </ol>
+                        <code class="command-line">
+                            <span class="command">cd &lt;mechanical_eyes dir&gt;</span>
+                            <span class="command">mkdir build && cd build</span>
+                            <span class="command">cmake ..</span>
+                            <span class="command">make && make install</span>
+                        </code>
                     </li>
                 </ol>
             </section>

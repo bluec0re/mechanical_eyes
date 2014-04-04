@@ -302,3 +302,85 @@ textarea {
         page-break-after: avoid;
     }
 }
+
+
+
+/* ==========================================================================
+   Markdown
+   ========================================================================== */
+
+.markdown-format code {
+    display: block;
+    padding: 8px 10px 8px;
+    margin: 10px 0;
+    border: 1px solid #dddddd;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    font-family: Monaco, "DejaVu Sans Mono", "Courier New", monospace;
+    font-size: 13px;
+    color: #666666;
+    -webkit-font-smoothing: inherit;
+    overflow: auto
+}
+
+.markdown-format code span {
+    display: block;
+    white-space: pre-wrap
+}
+
+.markdown-format code span.tooltip {
+    position: relative;
+    display: inline-block;
+    width: 100%
+}
+
+.markdown-format code span.tooltip span {
+    display: block;
+    color: #999999
+}
+
+.markdown-format code span.tooltip:hover {
+    background: #eee;
+    padding: 0 2px;
+    margin-left: -2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box
+}
+
+.markdown-format code.command-line {
+    border: 2px solid #dddddd;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    -webkit-font-smoothing: auto
+}
+
+.markdown-format code.command-line em {
+    color: #F9FE64;
+    font-style: italic
+}
+
+.markdown-format code.command-line .command:before {
+    content: "$ "
+}
+
+.markdown-format code.command-line .comment {
+    color: #ccc
+}
+
+.markdown-format code.command-line .comment:before {
+    content: "# "
+}
+
+.markdown-format code.command-line .output {
+    color: #63E463
+}
