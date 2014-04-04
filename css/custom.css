@@ -93,3 +93,8 @@ ul.software_list li a:visited {
 ul.software_list li a:hover {
     color: #b3d4fc;
 }
+
+.caption {
+    padding-top: 1em;
+    font-weight: bold;
+}
