@@ -1,10 +1,11 @@
 Requirements
 ============
 
-* CMake
-* OpenCV 2.4 (http://opencv.org)
+* Arch Linux ARM for Raspberry Pi (ARMv6) http://archlinuxarm.org/platforms/armv6/raspberry-pi
+* OpenCV 2.4 http://opencv.org/
 * PiBits ServoBlaster (https://github.com/richardghirst/PiBits/tree/master/ServoBlaster)
-* mmal
+* mmal (raspi userland tools)
+* raspicam 0.0.5 http://sourceforge.net/projects/raspicam/
 
 Install
 =======
