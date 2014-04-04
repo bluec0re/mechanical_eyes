@@ -2,13 +2,18 @@
     display: none;
 }
 
-body {
+html, body {
 	overflow: hidden;
 }
 
 main {
     width: 100%;
     height: 100%;
+}
+
+section {
+    overflow: auto !important;
+    height: 80%;
 }
 
 section#landingpage {
