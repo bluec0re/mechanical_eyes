@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/pygments.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/custom.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -46,6 +47,23 @@
                     <li>raspicam 0.0.5 <a href="http://sourceforge.net/projects/raspicam/">http://sourceforge.net/projects/raspicam/</a></li>
                     <li>mechanical eyes (entwickelt im Verlauf dieses Projekts) <a href="https://github.com/bluec0re/mechanical_eyes">https://github.com/bluec0re/mechanical_eyes</a></li>
                 </ul>
+
+                <h2>Implementierung</h2>
+                Die Implementierung ist aufgeteilt in eine Bibliothek zur Video Analyse, einem Programm zum testen der Kalibrierung und dem eigentlichen
+                Programm welches auf Personen im Bild reagiert und die Servos ansteuert. Die Unterteilung wurde durchgef&uuml;hrt um den Kompilationsaufwand auf dem Raspberry Pi zu minimieren.
+
+                <h3>PersonTracker</h3>
+                PersonTracker ist die Bibliothek welche die Bilder von der Raspberry Pi Kamera abruft, je nach gew&auml;hlter Variante
+                analysiert (Details im Abschnitt Video Processing). Die Bibliothek liefert die prozentuale Position (Werte zwischen 0 und 1) des gefundenen Gesichtes im Bild.
+                Die Konfiguration des Haarcascades Algorithmus kann &uuml;ber die Datei settings.ini erfolgen.
+                <br/>
+                PersonTracker liefert ein eigenes Programm (tracker_standalone) mit, welches ein Testen der gew&auml;hlten Paramerter erlaubt.
+                Dabei werden 2 Bilder generiert (faces.png und persons.png) welche das Ergebnis der Verarbeitung darstellen.
+
+                <h3>Mechanical Eyes</h3>
+                Mechanical Eyes ist das Hauptprogramm welches die Ergebnisse der Gesichtserkennung interpretiert und die Servos
+                dementsprechend steuert. Auch hier kann die Feineinstellung der Servos &uuml;ber die Konfigurationsdatei erfolgen.
+
                 <h2>Installationsanleitung</h2>
                 <ol>
                     <li>Installiere cmake</li>
@@ -57,7 +75,7 @@
                             <span class="command">cd PiBits/ServoBlaster/user</span>
                             <span class="command">make</span>
                         </code>
-                        Optional auf dem raspbian OS (triggert Autostart):
+                        Optional auf dem raspbian OS (triggert Autostart beim Boot):
                         <code class="command-line">
                             <span class="command">make install</span>
                         </code>
@@ -79,6 +97,70 @@
                         </code>
                     </li>
                 </ol>
+
+                <h2>Konfiguration</h2>
+                Die folgende Beispielkonfiguration wird in <i>/etc/mechanical_eyes/settings.ini</i> installiert. Diese
+                Konfiguration stellt eine funktionierende Variante mit der aktuellen Hardware Konstellation dar.
+                <br>
+                Die jeweilige Erkl&auml;hrung f&uuml;r die einzelnen Parameters ist mit Kommentaren versehen.
+                <div class="highlight"><pre><span class="c1">; settings for the video recording</span>
+<span class="k">[persontracker]</span>
+<span class="c1">; image width (default: 640)</span>
+<span class="na">width</span> <span class="o">=</span> <span class="s">320</span>
+<span class="c1">; image height (default: 480)</span>
+<span class="na">height</span> <span class="o">=</span> <span class="s">240</span>
+<span class="c1">; brightness value (0-100) (default: 50)</span>
+<span class="na">brightness</span> <span class="o">=</span> <span class="s">55</span>
+<span class="c1">; contrast value (0-100) (default: 50)</span>
+<span class="na">contrast</span> <span class="o">=</span> <span class="s">50</span>
+<span class="c1">; saturation value (0-100) (default: 50)</span>
+<span class="na">saturation</span> <span class="o">=</span> <span class="s">50</span>
+<span class="c1">; gain value (0-100) (default: 50)</span>
+<span class="na">gain</span> <span class="o">=</span> <span class="s">50</span>
+<span class="c1">; flips the image vertically (default: false)</span>
+<span class="na">flip_vertical</span> <span class="o">=</span> <span class="s">true</span>
+<span class="c1">; flips the image horizontally (default: false)</span>
+<span class="na">flip_horizontal</span> <span class="o">=</span> <span class="s">false</span>
+
+<span class="c1">; settings for the face detection (settings for http://docs.opencv.org/modules/objdetect/doc/cascade_classification.html#cascadeclassifier-detectmultiscale)</span>
+<span class="k">[persontracker-face]</span>
+<span class="na">scalefactor</span> <span class="o">=</span> <span class="s">1.1</span>
+<span class="na">minneighbors</span> <span class="o">=</span> <span class="s">4</span>
+<span class="na">flags</span> <span class="o">=</span> <span class="s">6</span>
+<span class="na">minsize_x</span> <span class="o">=</span> <span class="s">20</span>
+<span class="na">minsize_y</span> <span class="o">=</span> <span class="s">20</span>
+<span class="na">maxsize_x</span> <span class="o">=</span> <span class="s">0</span>
+<span class="na">maxsize_y</span> <span class="o">=</span> <span class="s">0</span>
+
+<span class="c1">; servo settings</span>
+<span class="k">[mechanical_eyes]</span>
+<span class="c1">; servo id for vertical control, left side</span>
+<span class="na">servo_vertical_left</span> <span class="o">=</span> <span class="s">0</span>
+<span class="c1">; minimal allowed servo value</span>
+<span class="na">servo_vertical_left_min</span> <span class="o">=</span> <span class="s">110</span>
+<span class="c1">; maxium allowed servo value</span>
+<span class="na">servo_vertical_left_max</span> <span class="o">=</span> <span class="s">200</span>
+<span class="c1">; scaling of the percentage value (max-min)*percentage*scale</span>
+<span class="na">servo_vertical_left_scale</span> <span class="o">=</span> <span class="s">1.0</span>
+
+<span class="c1">; servo id for vertical control, right side (not used at the moment)</span>
+<span class="c1">;servo_vertical_right = </span>
+<span class="c1">;servo_vertical_right_min = 80</span>
+<span class="c1">;servo_vertical_right_max = 130</span>
+<span class="c1">;servo_vertical_right_scale = 1.0</span>
+
+<span class="c1">; servo id for horizontal control, left side</span>
+<span class="na">servo_horizontal_left</span> <span class="o">=</span> <span class="s">1</span>
+<span class="na">servo_horizontal_left_min</span> <span class="o">=</span> <span class="s">80</span>
+<span class="na">servo_horizontal_left_max</span> <span class="o">=</span> <span class="s">200</span>
+<span class="na">servo_horizontal_left_scale</span> <span class="o">=</span> <span class="s">-1.0</span>
+
+<span class="c1">; servo id for horizontal control, right side</span>
+<span class="na">servo_horizontal_right</span> <span class="o">=</span> <span class="s">4</span>
+<span class="na">servo_horizontal_right_min</span> <span class="o">=</span> <span class="s">80</span>
+<span class="na">servo_horizontal_right_max</span> <span class="o">=</span> <span class="s">200</span>
+<span class="na">servo_horizontal_right_scale</span> <span class="o">=</span> <span class="s">-1.0</span>
+</pre></div>
             </section>
 
             <section id="video" class="subpage">
@@ -94,12 +176,19 @@
                 <br/>
                 Die eigentliche Erkennung erfolgt mit dem HaarCascade Algorithmus. Dazu werden Helligkeitsdifferenzen
                 anhand von zuvor trainierten Modellen im Bild gesucht.
+                <div style="text-align: center">
+                    <img src="img/haar.png" alt="no-pic" />
+                    <div class="caption">Beispiel Erkennnung von Haarcascades (Bild von opencv.org)</div>
+                </div>
                 <br/>
                 Das Resultat bei einem erfolgreich gefundenen Gesicht ist im folgenden Bild zu erkennen:
                 <div style="text-align: center">
     				<img src="img/faces.png" alt="no-pic" />
                     <div class="caption">Gesichtserkennung</div>
                 </div>
+                Ein weiterer Ansatz war die Erkennung von Personen anstelle von Gesichtern. Dazu wurde ein HOG Detektor (<a href="https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients">Wikipedia</a>)
+                verwendet. Nach einer erkannten Person wurde die Position des Gesichts nach dem goldenen Schnitt gesch&auuml;tzt.
+                Da dieser Ansatz jedoch zu rechenlastig war, wurde dieser im endg&uuml;ltigen Programm nicht mehr verwendet.
             </section>
 
             <section id="hardware" class="subpage">
