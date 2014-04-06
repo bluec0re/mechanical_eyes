@@ -20,6 +20,10 @@ section#landingpage {
     background-color: rgb(58, 22, 22);
 }
 
+section#landingpage div {
+    position: relative;
+}
+
 section#landingpage img#start {
     width: 100%;
 }
