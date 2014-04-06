@@ -338,8 +338,26 @@
 				<h2>Planung</h2>
 				<h3>Software-Planung</h3>
 				<p>
-				
+				Da der Raspberry Pi als Plattform vorgegeben war, fiel die Wahl des Betriebssystems recht schnell auf
+                                Arch Linux. Vorteile von Arch Linux gegen&uuml;ber dem weit verbreiteten Raspbian (Debian Derivat) sind neben
+                                neuster Software auch der minimalistische Ansatz was ein detailiertes Tuning der Laufzeit und hohe Flexibilit&auml;t
+                                erm&ouml;glicht.
 				</p>
+                                <p>
+                                F&uuml;r die zweite Anforderung (die Kamera + Bildverarbeitung) fiel die Wahl nach einigen Performance Tests
+                                auf das OpenCV Framework. Seine F&uuml;lle an Algorithmen und die Objektorientierung (seit Version 2) ermoeglichte
+                                es die Anbindung an das Raspberry Pi Kamera Modul ohne gro&szlig;e Probleme zu realisieren.<br>
+                                F&uuml;r die Erkennung wurden verschiedene Algorithmen in Betracht gezogen, darunter Haarcascades und HOG. Da diese
+                                schon in optimierter Form in OpenCV enthalten sind, wurden beide Algorithmen in den ersten Softwareprototypen eingebaut.
+                                </p>
+                                <p>
+                                Die Ansteuerung der Servos sollte mithilfe des PWM Modus der GPIO Pins des Raspberry Pi erfolgen. Um die Steuerung zu
+                                erleichtern wurde nach einer Bibliothek gesucht welche die Konfiguration abstrahiert. Nach einiger Recherche fiel die
+                                Wahl auf das ServoBlaster Modul der PiBits Bibliothek. Da ServoBlaster ein virtuelles Device bereitstellt, bleibt die
+                                M&ouml;glichkeit offen die Servos &uuml;ber verschiedenste Programmiersprachen und gegebenenfalls ohne root Rechte
+                                anzusteuern.
+                                </p>
+
 				<h3>Hardware-Planung</h3>
 				<p>
 				Da die Augen ein Gesicht nicht nur horizontal sondern auch vertikal verfolgen sollen, wurde im ersten Schritt 
