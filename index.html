@@ -39,7 +39,7 @@
             </section>
 
             <section id="software" class="subpage markdown-format">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_software">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_software">&lt; Zur&uuml;ck</a>
                 <h2>Eingesetzte Software</h2>
                 <ul class="software_list">
                     <li>Arch Linux ARM f&uuml;r Raspberry Pi (ARMv6) <a href="http://archlinuxarm.org/platforms/armv6/raspberry-pi">http://archlinuxarm.org/platforms/armv6/raspberry-pi</a></li>
@@ -162,10 +162,15 @@
 <span class="na">servo_horizontal_right_max</span> <span class="o">=</span> <span class="s">200</span>
 <span class="na">servo_horizontal_right_scale</span> <span class="o">=</span> <span class="s">-1.0</span>
 </pre></div>
+                Die Nummerierung der Servos kann man &uuml;ber das device servoblaster-cfg abrufen:
+
+                <code class="command-line">
+                    <span class="command">cat /dev/servoblaster-cfg</span>
+                </code>
             </section>
 
             <section id="video" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_video">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_video">&lt; Zur&uuml;ck</a>
                 <h2>Video Processing</h2>
                 Zur Erkennung von Personen im aufgezeichneten Bild wird die Grafikbibliothek OpenCV verwendet.
                 Dazu wird das Bild zun&auml;chst vorverarbeitet um Fehlerquellen wie Lichtverh&auml;ltnisse m&ouml;glichst
@@ -193,7 +198,7 @@
             </section>
 
             <section id="servo" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_servo">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_servo">&lt; Zur&uuml;ck</a>
                 <h2>Servo Steuerung</h2>
                 Die Servos werden &uuml;ber die GPIO Pins des Raspberry Pi angesteuert. Dazu erfolgt eine Pulsweitenmodulation
                 (PWM) durch den Linux Kernel mit Servoblaster als Middleware. Wie im folgenden Bild dargestellt wird die
@@ -206,7 +211,7 @@
             </section>
 
             <section id="hardware" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_hardware">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_hardware">&lt; Zur&uuml;ck</a>
 				<h2>Verwendete Materialien</h2>
 				<ul>
 					<li>Aluminium Profil 2,5cm x 1,5cm</li>
@@ -227,7 +232,7 @@
             </section>
 
 			<section id="team" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_team">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_team">&lt; Zur&uuml;ck</a>
 				<h2>Team</h2>
 				<div style="text-align: center">
 					<img src="img/team.png" alt="Team" />
@@ -236,7 +241,7 @@
             </section>
 
 			<section id="probleme" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_probleme">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_probleme">&lt; Zur&uuml;ck</a>
 				<h2>Probleme</h2>
 
                 <h3>Software</h3>
@@ -282,11 +287,23 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        Die Servos ben&ouml;tigen mehr Strom als der Raspberry Pi &uuml;ber seine GPIO Pins liefern kann.
+                        Dies f&uuml;hrte zu tempor&auml;ren (Raspberry Pi war nicht mehr erreichbar solange die Servos
+                        angesteuert wurden) und permanenten (kompletter Absturz des Raspberry Pi) Problemen in der
+                        Nutzung
+                        <ul>
+                            <li>
+                                Durch hinzuf&uuml;gen eines zus&auml;tzlichen Batterypacks konnte die Stromzufuhr f&uuml;r
+                                die Servos ausgelagert werden.
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
 
 			<section id="downloads" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_downloads">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_downloads">&lt; Zur&uuml;ck</a>
 				<h2>Downloads</h2>
 				<ul>
 					<li><a href="downloads/projektplan_mechanische_augen.pdf">Projektplan</a></li>
@@ -296,7 +313,7 @@
             </section>
 
 			<section id="planung" class="subpage">
-                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_planung">&lt; back</a>
+                <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_planung">&lt; Zur&uuml;ck</a>
 				<h2>Aufgabenstellung und Planung</h2>
                 Aufgabe war die Planung und Umsetzung eines Roboters, welcher mithilfe eines Raspberry Pis und Kamera
                 Personen mit seinen Augen verfolgen kann.
