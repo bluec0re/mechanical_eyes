@@ -50,13 +50,13 @@
                 </ul>
 
                 <h2>Implementierung</h2>
-                Die Implementierung ist aufgeteilt in eine Bibliothek zur Video Analyse, einem Programm zum testen der Kalibrierung und dem eigentlichen
+                Die Implementierung ist aufgeteilt in eine Bibliothek zur Video Analyse, einem Programm zum Testen der Kalibrierung und dem eigentlichen
                 Programm welches auf Personen im Bild reagiert und die Servos ansteuert. Die Unterteilung wurde durchgef&uuml;hrt um den Kompilationsaufwand auf dem Raspberry Pi zu minimieren.
 
                 <h3>PersonTracker</h3>
                 PersonTracker ist die Bibliothek welche die Bilder von der Raspberry Pi Kamera abruft, je nach gew&auml;hlter Variante
                 analysiert (Details im Abschnitt Video Processing). Die Bibliothek liefert die prozentuale Position (Werte zwischen 0 und 1) des gefundenen Gesichtes im Bild.
-                Die Konfiguration des Haarcascades Algorithmus kann &uuml;ber die Datei settings.ini erfolgen.
+                Die Konfiguration des Haarcascades Algorithmus erfolgt &uuml;ber die Datei settings.ini.
                 <br/>
                 PersonTracker liefert ein eigenes Programm (tracker_standalone) mit, welches ein Testen der gew&auml;hlten Paramerter erlaubt.
                 Dabei werden 2 Bilder generiert (faces.png und persons.png) welche das Ergebnis der Verarbeitung darstellen.
@@ -103,7 +103,7 @@
                 Die folgende Beispielkonfiguration wird in <i>/etc/mechanical_eyes/settings.ini</i> installiert. Diese
                 Konfiguration stellt eine funktionierende Variante mit der aktuellen Hardware Konstellation dar.
                 <br>
-                Die jeweilige Erkl&auml;hrung f&uuml;r die einzelnen Parameters ist mit Kommentaren versehen.
+                Die jeweilige Erkl&auml;hrung f&uuml;r die einzelnen Parameter ist mit Kommentaren versehen.
                 <div class="highlight"><pre><span class="c1">; settings for the video recording</span>
 <span class="k">[persontracker]</span>
 <span class="c1">; image width (default: 640)</span>
@@ -162,7 +162,7 @@
 <span class="na">servo_horizontal_right_max</span> <span class="o">=</span> <span class="s">200</span>
 <span class="na">servo_horizontal_right_scale</span> <span class="o">=</span> <span class="s">-1.0</span>
 </pre></div>
-                Die Nummerierung der Servos kann man &uuml;ber das device servoblaster-cfg abrufen:
+                Die Nummerierung der Servos kann &uuml;ber das Device servoblaster-cfg abgerufen werden:
 
                 <code class="command-line">
                     <span class="command">cat /dev/servoblaster-cfg</span>
@@ -229,15 +229,19 @@
 					<li>Siphonrohr 5cm Durchmesser</li>
 					<li>Tischtennisbälle</li>
 					<li>Schrauben</li>
-					<li>Büroklammern (Federstahl)</li>
+					<li>B&uuml;roklammern (Federstahl)</li>
 					<li>Raspberry Pi</li>
 					<li>Breakout Board</li>
 					<li>Modellbau Steckverbindungen</li>
 					<li>Batteriepack (inkl. 4 AA Batterien)</li>
 				</ul>
 				<h2>Aufbau</h2>
+				Zuerst wurde das 1m lange Aluminiumprofil in insgesamt 6 Teile zersägt. 
+				
+				
+				Im Folgenden wird das Vorgehen geschildert, mit dem der Roboter realisiert wurde:
 				<ol>
-					<li>...</li>
+					<li>In einem</li>
 				</ol>
             </section>
 
@@ -324,9 +328,41 @@
 
 			<section id="planung" class="subpage">
                 <a href="#landingpage" class="btn btn-default btn-lg" role="button" id="back_planung">&lt; Zur&uuml;ck</a>
-				<h2>Aufgabenstellung und Planung</h2>
-                Aufgabe war die Planung und Umsetzung eines Roboters, welcher mithilfe eines Raspberry Pis und Kamera
-                Personen mit seinen Augen verfolgen kann.
+				<h2>Aufgabenstellung</h2>
+				<p>
+                Aufgabe war die Planung und Umsetzung eines Roboters, welcher mithilfe eines Raspberry Pis und einer Kamera
+                die Gesichter von Personen erkennt und mit per Servo angesteuerten, mechanischen Augen verfolgt. Dabei sollte 
+				vor allem darauf geachtet werden, dass der Roboter erweiterbar ist und in einem späteren Projekt zusätzliche 
+				Komponenten (z.B. mechanische Augenbrauen) hinzugefügt werden können.
+				</p>
+				<h2>Planung</h2>
+				<h3>Software-Planung</h3>
+				<p>
+				
+				</p>
+				<h3>Hardware-Planung</h3>
+				<p>
+				Da die Augen ein Gesicht nicht nur horizontal sondern auch vertikal verfolgen sollen, wurde im ersten Schritt 
+				die Planung der mechanischen Konstruktion der Augen gemacht. Es stellte sich durch Probieren heraus, dass  
+				eine Kugel, die auf einen dünnen Stab gesteckt wurde, sich gut für horizontale Drehbewegungen eignet. In einem 
+				ersten Prototyp (siehe Abbildung 1) wurden dafür zwei Tischtennisbälle (4cm Durchmesser) je mit einer 
+				Schraube an einem Plastikring (5cm Durchmesser) fixiert. Für die vertikale Bewegung wurden diese Ringe 
+				orthogonal zu den Schrauben miteinander verbunden. Auf der jeweilig gegenüberliegenden Seite wurden im Anschluss 
+				Schrauben von innen durch die Plastikringe gesteckt, sodass das gesamte Konstrukt drehbar gelagert werden kann.
+				Damit die Servos die Augen bewegen können mussten diese in der Höhe der Augen fixiert werden. Einige Versuche 
+				ergaben, dass sich Federstahldraht, welcher durch ein Loch auf der Rückseite des Auges mit diesem verbunden wird, 
+				gut eignet. Damit kann die horizontale Bewegung durchgeführt werden. Die Vertikale musste dann über ein weiteres 
+				Stück Draht an der Oberseite von einem der Ringe realisiert werden.<br /><br />
+ 				</p>
+				<div align="center">
+					<img src="img/prototype.jpg" />
+					<p>Abbildung 1: Erster Prototyp</p>
+				</div>
+				<p>
+				Bei den Versuchen mit dem Prototyp stellte sich heraus, dass die Konstruktion nur dann funktioniert, wenn die 
+				Servos für die Horizontale exakt in der Mitte der Augen zwischen dem oberen und unteren Loch fixiert werden, da 
+				die vertikale Bewegung sonst die Strecke für das Drahtstück verlängert bzw. verkürtzt.
+				</p>
             </section>
 
             <!-- github ribbon -->
@@ -340,4 +376,3 @@
         <script src="js/main.js"></script>
     </body>
 </html>
-                        
