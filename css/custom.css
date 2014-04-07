@@ -6,6 +6,7 @@ html, body {
 	overflow: hidden;
         height: 100%;
         background-color: #fff;
+		counter-reset: caption;
 }
 
 main {
@@ -116,4 +117,9 @@ ul.software_list li a:hover {
 .caption {
     padding-top: 1em;
     font-weight: bold;
+	counter-increment: caption;
+}
+
+.caption:before {
+	content: "Abbildung " counter(caption) ": ";
 }

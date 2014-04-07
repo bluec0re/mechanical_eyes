@@ -216,7 +216,7 @@
                 Raspberry Pi zu verringern. Das Setup ist f&uuml;r einen Servo beispielhaft im folgenden Bild zu erkennen.
 
 
-                <div style="text-align: center">
+                <div align="center">
                     <img src="img/servo_setup.png">
                     <div class="caption">Servo Setup</div>
                 </div>
@@ -238,13 +238,62 @@
 					<li>Batteriepack (inkl. 4 AA Batterien)</li>
 				</ul>
 				<h2>Aufbau</h2>
-				Zuerst wurde das 1m lange Aluminiumprofil in insgesamt 6 Teile zersägt. 
-				
-				
-				Im Folgenden wird das Vorgehen geschildert, mit dem der Roboter realisiert wurde:
-				<ol>
-					<li>In einem</li>
-				</ol>
+				<h3>Rahmen</h3>
+				<p>
+				Zuerst wurde das 1m lange Aluminiumprofil in insgesamt sechs Teile zersägt. zwei x 20cm und zwei x 5,5cm für ein 
+				Rechteck, in welchem später die Augen verbaut werden und zwei x 24cm für zwei Rahmenteile, die mit dem Rechteck 
+				links und rechts gelagert verbunden werden, sodass das Rechteck mitsamt den Augen eine Kippbewegung 
+				durchführen kann. In die einzelnen Aluminiumteile wurden an 16 verschiedenen Stellen Löcher gebohrt:
+				</p>
+				<ul>
+					<li>2 pro Auge je im Abstand von 7cm vom Rand der langen Rechtecksteile</li>
+					<li>8 für das Rechteck (2 pro Teil)</li>
+					<li>4 für die Verbindung zwischen Alu-Rechteck und den 2 Rahmenteilen</li>
+					<li>4 für die Verbindung zwischen den 2 Rahmenteilen und der Grundplatte</li>
+				</ul>
+				<p>
+				Für die Stabilisierung der Konstruktion wurde eine Grundplatte aus Sperrholz an den Rahmenteilen befestigt.
+				</p>
+				<h3>Augen</h3>
+				<p>
+				Für die Augen wurden zwei Tischtennisbälle etwa bei zwei Drittel aufgeschnitten, wobei eine Lasche für eine 
+				elastische Verbindung mit den Servos ausgespart wurde. Daraufhin wurden drei Löcher in jeden Ball gebohrt: Zwei 
+				an exakt gegenüberliegenden Stellen und eines in die ausgesparte Lasche. Als Indikator für die Blickrichtung 
+				der Augen wurde ein Stück graues Klebeband verwendet.
+				Um seitlich keinen Einblick in bzw. hinter die Augen zu gewähren wurden 1cm breite Ringe von einem Siphonrohr 
+				abgesägt. In diese wurden wiederum auf zwei gegenüberliegenden Seiten Löcher gebohrt, sodass eine Schraube durch 
+				das Aluminiumrechteck, den Ring und den Ball durchgesteckt werden konnte. So war es möglich, die horizontale 
+				Richtung der Augen separat für jedes Auge und die vertikale für beide Augen zusammen zu steuern.
+				</p>
+				<h3>Servos</h3>			
+				<p>
+				Um die Servos auf Höhe der Augen befestigen zu können wurde eine weitere Sperrholzplatte senkrecht auf der 
+				Grundplatte festgeschraubt. Die Höhe wurde dabei so bemessen, dass die Servos direkt an die Holzplatte geschraubt 
+				werden können und einen idealen Abstand zu den zu bewegenden Teilen besteht. Für die Feinjustage der Servos wurden 
+				diese zuerst mit Klebeband auf der senkrecht stehenden Holzplatte fixiert, bevor sie dann mit Spax-Schrauben 
+				befestigt wurden.
+				</p>
+				<div align="center">
+					<img src="img/servos.jpg" />
+					<div class="caption">Feinjustierung der Servos</div>
+				</div>
+				<h3>Elektronik</h3>
+				<p>
+				Um mehr Flexibilität zu gewinnen wurden die benötigten GPIO Anschlüsse des Raspberry Pi Boards mit Steckkabeln auf 
+				ein Breakout Board gelegt. So ist es möglich, dass der angeschlossene Akkupack und die Servos einfach miteinander 
+				verbunden werden können.
+				<div align="center">
+					<img src="img/electronics.jpg" />
+					<div class="caption">Raspberry Pi mit Breakout Board und Steckverbindungen</div>
+				</div>
+				</p>
+				<h3>Raspberry Pi und RasPiCam</h3>
+				<p>
+				Das Raspberry Board wurde in einer speziell dafür angefertigten Plastikhülle frontal auf das senkrecht stehende 
+				Brett geschraubt. Die Kamera wurde ebenfalls in eine Plastikhülle gepackt und an der Front der Grundplatte 
+				zwischen den beiden Rahmenteilen mit Klebenband fixiert, sodass verschiedene Kippwinkel möglich sind - je nachdem 
+				wie groß der Höhenunterschied zwischen Roboter und Mensch ist.
+				</p>
             </section>
 
 			<section id="team" class="subpage">
@@ -365,18 +414,18 @@
 				Da die Augen ein Gesicht nicht nur horizontal sondern auch vertikal verfolgen sollen, wurde im ersten Schritt 
 				die Planung der mechanischen Konstruktion der Augen gemacht. Es stellte sich durch Probieren heraus, dass  
 				eine Kugel, die auf einen dünnen Stab gesteckt wurde, sich gut für horizontale Drehbewegungen eignet. In einem 
-				ersten Prototyp (siehe Abbildung 1) wurden dafür zwei Tischtennisbälle (4cm Durchmesser) je mit einer 
+				ersten Prototyp (siehe Abbildung) wurden dafür zwei Tischtennisbälle (4cm Durchmesser) je mit einer 
 				Schraube an einem Plastikring (5cm Durchmesser) fixiert. Für die vertikale Bewegung wurden diese Ringe 
 				orthogonal zu den Schrauben miteinander verbunden. Auf der jeweilig gegenüberliegenden Seite wurden im Anschluss 
 				Schrauben von innen durch die Plastikringe gesteckt, sodass das gesamte Konstrukt drehbar gelagert werden kann.
 				Damit die Servos die Augen bewegen können mussten diese in der Höhe der Augen fixiert werden. Einige Versuche 
 				ergaben, dass sich Federstahldraht, welcher durch ein Loch auf der Rückseite des Auges mit diesem verbunden wird, 
 				gut eignet. Damit kann die horizontale Bewegung durchgeführt werden. Die Vertikale musste dann über ein weiteres 
-				Stück Draht an der Oberseite von einem der Ringe realisiert werden.<br /><br />
+				Stück Draht an der Oberseite von einem der Ringe realisiert werden.
  				</p>
 				<div align="center">
 					<img src="img/prototype.jpg" />
-					<p>Abbildung 1: Erster Prototyp</p>
+					<div class="caption">Erster Prototyp</div>
 				</div>
 				<p>
 				Bei den Versuchen mit dem Prototyp stellte sich heraus, dass die Konstruktion nur dann funktioniert, wenn die 
